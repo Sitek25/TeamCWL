@@ -1,5 +1,5 @@
 {
-  "updatedAt": "22.07.2026, 18:49:59",
+  "updatedAt": "22.07.2026, 19:00:11",
   "lolTeam": [
     {
       "playerName": "Sitek",
@@ -38,36 +38,36 @@
       ]
     },
     {
-      "playerName": "Gracz 3",
+      "playerName": "PaczCat",
       "role": "MEMBER",
       "accounts": [
         {
-          "name": "MidKing#EUW",
+          "name": "jawnogrzesznica#Paczu",
+          "currentElo": "DIAMOND III (67 LP)",
+          "winrate": 56,
+          "games": 111
+        }
+      ]
+    },
+    {
+      "playerName": "Areeone",
+      "role": "MEMBER",
+      "accounts": [
+        {
+          "name": "Areeone#Areeo ",
+          "currentElo": "PLATINUM IV (65 LP)",
+          "winrate": 50,
+          "games": 8
+        }
+      ]
+    },
+    {
+      "playerName": "Drożdzu",
+      "role": "MEMBER",
+      "accounts": [
+        {
+          "name": "ZwyklyCWK#EUNE",
           "currentElo": "Brak danych z API",
-          "winrate": 0,
-          "games": 0
-        }
-      ]
-    },
-    {
-      "playerName": "Gracz 4",
-      "role": "MEMBER",
-      "accounts": [
-        {
-          "name": "SupportGod#EUNE",
-          "currentElo": "Unranked",
-          "winrate": 0,
-          "games": 0
-        }
-      ]
-    },
-    {
-      "playerName": "Gracz 5",
-      "role": "MEMBER",
-      "accounts": [
-        {
-          "name": "JungleDiff#EUNE",
-          "currentElo": "Unranked",
           "winrate": 0,
           "games": 0
         }
@@ -92,7 +92,7 @@
       "playerName": "Miki",
       "role": "MEMBER",
       "premier": {
-        "rating": "3000"
+        "rating": "BRAK"
       },
       "faceit": {
         "level": "Level 5",
@@ -102,42 +102,42 @@
       }
     },
     {
-      "playerName": "Gracz 3",
+      "playerName": "PaczCat",
       "role": "MEMBER",
       "premier": {
-        "rating": "19,100"
+        "rating": "BRAK"
       },
       "faceit": {
-        "level": "N/A",
+        "level": "Level N/A",
         "elo": 0,
         "kd": "N/A",
-        "winrate": 0
+        "winrate": "0"
       }
     },
     {
-      "playerName": "Gracz 4",
+      "playerName": "Areeone",
       "role": "MEMBER",
       "premier": {
-        "rating": "9,400"
+        "rating": "BRAK"
       },
       "faceit": {
-        "level": "N/A",
-        "elo": 0,
-        "kd": "N/A",
-        "winrate": 0
+        "level": "Level 6",
+        "elo": 1220,
+        "kd": "1.1",
+        "winrate": "49"
       }
     },
     {
-      "playerName": "Gracz 5",
+      "playerName": "Drożdzu",
       "role": "MEMBER",
       "premier": {
-        "rating": "14,200"
+        "rating": "BRAK"
       },
       "faceit": {
-        "level": "N/A",
-        "elo": 0,
-        "kd": "N/A",
-        "winrate": 0
+        "level": "Level 8",
+        "elo": 1645,
+        "kd": "1.29",
+        "winrate": "49"
       }
     }
   ]
