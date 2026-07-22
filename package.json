@@ -1,0 +1,10 @@
+{
+  "name": "team-dashboard",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Team Stats Dashboard powered by GitHub Actions",
+  "main": "fetch-stats.js",
+  "scripts": {
+    "update": "node fetch-stats.js"
+  }
+}
