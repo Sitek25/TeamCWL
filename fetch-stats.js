@@ -10,7 +10,7 @@ const PLAYERS_CONFIG = [
     role: "Admin",
     lolAccounts: [
       { gameName: "Sit3k", tagLine: "Sit3k" },
-      { gameName: "S1 Siteek", tagLine: "EUNE" }
+      { gameName: "S1 Siteek", tagLine: "EUNE" },
       { gameName: "eGirl from Dream", tagLine: "EUNE" }
     ],
     cs2: {
