@@ -1,1 +1,132 @@
-{}
+{
+  "updatedAt": "22.07.2026, 18:45:20",
+  "lolTeam": [
+    {
+      "playerName": "Sitek",
+      "role": "Admin",
+      "accounts": [
+        {
+          "name": "Sit3k#Sit3k",
+          "currentElo": "Brak danych z API",
+          "winrate": 0,
+          "games": 0
+        }
+      ]
+    },
+    {
+      "playerName": "Miki",
+      "role": "MEMBER",
+      "accounts": [
+        {
+          "name": "LACOST#CWL",
+          "currentElo": "Brak danych z API",
+          "winrate": 0,
+          "games": 0
+        }
+      ]
+    },
+    {
+      "playerName": "Gracz 3",
+      "role": "MEMBER",
+      "accounts": [
+        {
+          "name": "MidKing#EUW",
+          "currentElo": "Brak danych z API",
+          "winrate": 0,
+          "games": 0
+        }
+      ]
+    },
+    {
+      "playerName": "Gracz 4",
+      "role": "MEMBER",
+      "accounts": [
+        {
+          "name": "SupportGod#EUNE",
+          "currentElo": "Brak danych z API",
+          "winrate": 0,
+          "games": 0
+        }
+      ]
+    },
+    {
+      "playerName": "Gracz 5",
+      "role": "MEMBER",
+      "accounts": [
+        {
+          "name": "JungleDiff#EUNE",
+          "currentElo": "Brak danych z API",
+          "winrate": 0,
+          "games": 0
+        }
+      ]
+    }
+  ],
+  "cs2Team": [
+    {
+      "playerName": "Sitek",
+      "role": "Admin",
+      "premier": {
+        "rating": "BRAK"
+      },
+      "faceit": {
+        "level": "Level 8",
+        "elo": 1566,
+        "kd": "0.94",
+        "winrate": "50"
+      }
+    },
+    {
+      "playerName": "Miki",
+      "role": "MEMBER",
+      "premier": {
+        "rating": "3000"
+      },
+      "faceit": {
+        "level": "Level 5",
+        "elo": 1097,
+        "kd": "0.91",
+        "winrate": "50"
+      }
+    },
+    {
+      "playerName": "Gracz 3",
+      "role": "MEMBER",
+      "premier": {
+        "rating": "19,100"
+      },
+      "faceit": {
+        "level": "N/A",
+        "elo": 0,
+        "kd": "N/A",
+        "winrate": 0
+      }
+    },
+    {
+      "playerName": "Gracz 4",
+      "role": "MEMBER",
+      "premier": {
+        "rating": "9,400"
+      },
+      "faceit": {
+        "level": "N/A",
+        "elo": 0,
+        "kd": "N/A",
+        "winrate": 0
+      }
+    },
+    {
+      "playerName": "Gracz 5",
+      "role": "MEMBER",
+      "premier": {
+        "rating": "14,200"
+      },
+      "faceit": {
+        "level": "N/A",
+        "elo": 0,
+        "kd": "N/A",
+        "winrate": 0
+      }
+    }
+  ]
+}
