@@ -26,42 +26,43 @@ const PLAYERS_CONFIG = [
     ],
     cs2: {
       faceitNickname: "mikifive2001",
-      premierRating: "3000"
+      premierRating: "BRAK"
     }
   },
   {
-    playerName: "Gracz 3",
+    playerName: "PaczCat",
     role: "MEMBER",
     lolAccounts: [
-      { gameName: "MidKing", tagLine: "EUW" }
+      { gameName: "jawnogrzesznica", tagLine: "Paczu" }
     ],
     cs2: {
-      faceitNickname: "Gracz3Faceit",
-      premierRating: "19,100"
+      faceitNickname: "PaczCat",
+      premierRating: "BRAK"
     }
   },
   {
-    playerName: "Gracz 4",
+    playerName: "Areeone",
     role: "MEMBER",
     lolAccounts: [
-      { gameName: "SupportGod", tagLine: "EUNE" }
+      { gameName: "Areeone", tagLine: "Areeo " }
     ],
     cs2: {
-      faceitNickname: "Gracz4Faceit",
-      premierRating: "9,400"
+      faceitNickname: "Alfred3000",
+      premierRating: "BRAK"
     }
   },
   {
-    playerName: "Gracz 5",
+    playerName: "Drożdzu",
     role: "MEMBER",
     lolAccounts: [
-      { gameName: "JungleDiff", tagLine: "EUNE" }
+      { gameName: "ZwyklyCWK", tagLine: "EUNE" }
     ],
     cs2: {
-      faceitNickname: "Gracz5Faceit",
-      premierRating: "14,200"
+      faceitNickname: "TurboTaco123",
+      premierRating: "BRAK"
     }
   }
+  
 ];
 
 async function fetchLoLAccountData(account) {
