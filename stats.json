@@ -1,5 +1,5 @@
 {
-  "updatedAt": "22.07.2026, 18:45:20",
+  "updatedAt": "22.07.2026, 18:49:59",
   "lolTeam": [
     {
       "playerName": "Sitek",
@@ -7,9 +7,21 @@
       "accounts": [
         {
           "name": "Sit3k#Sit3k",
-          "currentElo": "Brak danych z API",
-          "winrate": 0,
-          "games": 0
+          "currentElo": "DIAMOND IV (55 LP)",
+          "winrate": 51,
+          "games": 203
+        },
+        {
+          "name": "S1 Siteek#EUNE",
+          "currentElo": "EMERALD III (20 LP)",
+          "winrate": 48,
+          "games": 132
+        },
+        {
+          "name": "eGirl from Dream#EUNE",
+          "currentElo": "EMERALD IV (66 LP)",
+          "winrate": 46,
+          "games": 83
         }
       ]
     },
@@ -19,9 +31,9 @@
       "accounts": [
         {
           "name": "LACOST#CWL",
-          "currentElo": "Brak danych z API",
-          "winrate": 0,
-          "games": 0
+          "currentElo": "PLATINUM IV (81 LP)",
+          "winrate": 51,
+          "games": 195
         }
       ]
     },
@@ -43,7 +55,7 @@
       "accounts": [
         {
           "name": "SupportGod#EUNE",
-          "currentElo": "Brak danych z API",
+          "currentElo": "Unranked",
           "winrate": 0,
           "games": 0
         }
@@ -55,7 +67,7 @@
       "accounts": [
         {
           "name": "JungleDiff#EUNE",
-          "currentElo": "Brak danych z API",
+          "currentElo": "Unranked",
           "winrate": 0,
           "games": 0
         }
