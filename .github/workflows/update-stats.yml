@@ -1,0 +1,33 @@
+name: Update Team Stats
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'  # Uruchamiaj co 6 godzin
+  workflow_dispatch:        # Przycisk do ręcznego uruchomienia w panelu GitHub
+
+jobs:
+  update-data:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Fetch Latest Stats from APIs
+        env:
+          RIOT_API_KEY: ${{ secrets.RIOT_API_KEY }}
+          FACEIT_API_KEY: ${{ secrets.FACEIT_API_KEY }}
+        run: node fetch-stats.js
+
+      - name: Commit and push if stats.json changed
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "auto: update team stats from API [skip ci]"
+          file_pattern: 'stats.json'
