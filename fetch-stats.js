@@ -28,8 +28,7 @@ const PLAYERS_CONFIG = [
       faceitNickname: "mikifive2001",
       premierRating: "BRAK"
     },
-    cr: {
-  clashRoyaleTag: "#2GGQVQLU"}
+   clashRoyaleTag: "#2GGQVQLU",
     
   },
   {
