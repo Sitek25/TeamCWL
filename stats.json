@@ -1,5 +1,5 @@
 {
-  "updatedAt": "23.07.2026, 14:44:10",
+  "updatedAt": "23.07.2026, 15:19:33",
   "lolTeam": [
     {
       "playerName": "Sitek",
@@ -288,6 +288,140 @@
         "elo": 1458,
         "kd": "1.16",
         "winrate": "50"
+      }
+    }
+  ],
+  "clashRoyaleTeam": [
+    {
+      "playerName": "Sitek",
+      "role": "Admin",
+      "stats": {
+        "ingameName": "Brak danych",
+        "trophies": 0,
+        "bestTrophies": 0,
+        "wins": 0,
+        "clan": "Brak",
+        "warDayWins": 0
+      }
+    },
+    {
+      "playerName": "Miki",
+      "role": "MEMBER",
+      "stats": {
+        "ingameName": "Brak danych",
+        "trophies": 0,
+        "bestTrophies": 0,
+        "wins": 0,
+        "clan": "Brak",
+        "warDayWins": 0
+      }
+    },
+    {
+      "playerName": "PaczCat",
+      "role": "MEMBER",
+      "stats": {
+        "ingameName": "Brak danych",
+        "trophies": 0,
+        "bestTrophies": 0,
+        "wins": 0,
+        "clan": "Brak",
+        "warDayWins": 0
+      }
+    },
+    {
+      "playerName": "Areeone",
+      "role": "MEMBER",
+      "stats": {
+        "ingameName": "Brak danych",
+        "trophies": 0,
+        "bestTrophies": 0,
+        "wins": 0,
+        "clan": "Brak",
+        "warDayWins": 0
+      }
+    },
+    {
+      "playerName": "Drożdzu",
+      "role": "MEMBER",
+      "stats": {
+        "ingameName": "Brak danych",
+        "trophies": 0,
+        "bestTrophies": 0,
+        "wins": 0,
+        "clan": "Brak",
+        "warDayWins": 0
+      }
+    },
+    {
+      "playerName": "Smoky",
+      "role": "MEMBER",
+      "stats": {
+        "ingameName": "Brak danych",
+        "trophies": 0,
+        "bestTrophies": 0,
+        "wins": 0,
+        "clan": "Brak",
+        "warDayWins": 0
+      }
+    },
+    {
+      "playerName": "Samoreq",
+      "role": "MEMBER",
+      "stats": {
+        "ingameName": "Brak danych",
+        "trophies": 0,
+        "bestTrophies": 0,
+        "wins": 0,
+        "clan": "Brak",
+        "warDayWins": 0
+      }
+    },
+    {
+      "playerName": "Jarzi",
+      "role": "MEMBER",
+      "stats": {
+        "ingameName": "Brak danych",
+        "trophies": 0,
+        "bestTrophies": 0,
+        "wins": 0,
+        "clan": "Brak",
+        "warDayWins": 0
+      }
+    },
+    {
+      "playerName": "MCK",
+      "role": "MEMBER",
+      "stats": {
+        "ingameName": "Brak danych",
+        "trophies": 0,
+        "bestTrophies": 0,
+        "wins": 0,
+        "clan": "Brak",
+        "warDayWins": 0
+      }
+    },
+    {
+      "playerName": "Gregor",
+      "role": "MEMBER",
+      "stats": {
+        "ingameName": "Brak danych",
+        "trophies": 0,
+        "bestTrophies": 0,
+        "wins": 0,
+        "clan": "Brak",
+        "warDayWins": 0
+      }
+    },
+    {
+      "playerName": "Zywan",
+      "role": "MEMBER",
+      "stats": {
+        "ingameName": "Brak danych",
+        "trophies": 0,
+        "bestTrophies": 0,
+        "wins": 0,
+        "clan": "Brak",
+        "warDayWins": 0
       }
     }
   ]
