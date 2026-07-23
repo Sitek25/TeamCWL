@@ -2,6 +2,7 @@ import fs from 'fs';
 
 const RIOT_API_KEY = process.env.RIOT_API_KEY;
 const FACEIT_API_KEY = process.env.FACEIT_API_KEY;
+const CLASH_ROYALE_API_KEY = process.env.CLASH_ROYALE_API_KEY;
 
 const PLAYERS_CONFIG = [
   {
@@ -26,7 +27,10 @@ const PLAYERS_CONFIG = [
     cs2: {
       faceitNickname: "mikifive2001",
       premierRating: "BRAK"
-    }
+    },
+    cr: {
+  clashRoyaleTag: "#2GGQVQLU"}
+    
   },
   {
     playerName: "PaczCat",
@@ -194,14 +198,40 @@ async function fetchFaceitData(nickname) {
   }
 }
 
+async function fetchClashRoyaleData(tag) {
+  if (!CLASH_ROYALE_API_KEY || !tag || tag === "-") return null;
+  try {
+    // Hasz (#) w tagu gracza musi być wyencodowany w URL jako %23
+    const formattedTag = tag.startsWith('#') ? tag.replace('#', '%23') : `%23${tag}`;
+    const headers = { Authorization: `Bearer ${CLASH_ROYALE_API_KEY}` };
+
+    const res = await fetch(`https://api.clashroyale.com/v1/players/${formattedTag}`, { headers });
+    if (!res.ok) return null;
+    const data = await res.json();
+
+    return {
+      ingameName: data.name || "N/A",
+      trophies: data.trophies || 0,
+      bestTrophies: data.bestTrophies || 0,
+      wins: data.wins || 0,
+      clan: data.clan ? data.clan.name : "Brak klanu",
+      warDayWins: data.warDayWins || 0
+    };
+  } catch (err) {
+    console.error(`Błąd Clash Royale dla ${tag}:`, err.message);
+    return null;
+  }
+}
+
 async function main() {
   console.log("Rozpoczynanie pobierania danych z API...");
   const outputData = {
     updatedAt: new Date().toLocaleString("pl-PL", { timeZone: "Europe/Warsaw" }),
     lolTeam: [],
-    cs2Team: []
+    cs2Team: [],
+    clashRoyaleTeam: []
   };
-
+  
   for (const player of PLAYERS_CONFIG) {
 
     const lolAccountsData = [];
@@ -225,6 +255,13 @@ async function main() {
       role: player.role,
       premier: { rating: player.cs2.premierRating },
       faceit: faceitData || { level: "N/A", elo: 0, kd: "N/A", winrate: 0 }
+    });
+    const crData = await fetchClashRoyaleData(player.clashRoyaleTag);
+    outputData.clashRoyaleTeam.push({
+      playerName: player.playerName,
+      role: player.role,
+      tag: player.clashRoyaleTag,
+      stats: crData || { ingameName: "Brak danych", trophies: 0, bestTrophies: 0, wins: 0, clan: "Brak", warDayWins: 0 }
     });
   }
 
