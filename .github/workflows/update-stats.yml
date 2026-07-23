@@ -24,7 +24,8 @@ jobs:
         env:
           RIOT_API_KEY: ${{ secrets.RIOT_API_KEY }}
           FACEIT_API_KEY: ${{ secrets.FACEIT_API_KEY }}
-        run: node fetch-stats.js
+          CLASH_ROYALE_API_KEY: ${{ secrets.CLASH_ROYALE_API_KEY }}
+        run: node fetch-stats.js  
 
       - name: Commit and push if stats.json changed
         uses: stefanzweifel/git-auto-commit-action@v5
