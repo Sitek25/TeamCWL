@@ -1,5 +1,5 @@
 {
-  "updatedAt": "23.07.2026, 15:19:33",
+  "updatedAt": "23.07.2026, 15:23:08",
   "lolTeam": [
     {
       "playerName": "Sitek",
@@ -307,6 +307,7 @@
     {
       "playerName": "Miki",
       "role": "MEMBER",
+      "tag": "#2GGQVQLU",
       "stats": {
         "ingameName": "Brak danych",
         "trophies": 0,
