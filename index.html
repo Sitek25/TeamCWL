@@ -201,19 +201,19 @@
             background-color: #0056b3;
         }
 
-        /* Nakładka (tło) dla wyświetlanej grafiki na środku */
+        
         .image-overlay {
-            display: none; /* Domyślnie ukryte */
+            display: none; 
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.7); /* Ciemne, półprzezroczyste tło */
+            background-color: rgba(0, 0, 0, 0.7); 
             justify-content: center;
             align-items: center;
             z-index: 2000;
-            cursor: pointer; /* Znak dla użytkownika, że można kliknąć, żeby zamknąć */
+            cursor: pointer; 
         }
 
         /* Styl samej grafiki */
@@ -265,12 +265,12 @@
                 </div>
             </div>
         </section>
-        <!-- Guzik wywołujący grafikę -->
-    <button class="floating-btn" id="openBtn">Pokaż grafikę</button>
+      
+    <button class="floating-btn" id="openBtn">+</button>
 
-    <!-- Kontener z grafiką (środek ekranu) -->
+ 
     <div class="image-overlay" id="imgOverlay">
-        <!-- PODMIEŃ URL W SRC NA SWOJĄ GRAFIKĘ -->
+        >
         <img src="guzikzdjecie.jpg" alt="Wyświetlana grafika">
     </div>
     </main>
@@ -301,7 +301,7 @@
                 document.getElementById('lol-updated').innerText = updatedText;
                 document.getElementById('cs2-updated').innerText = updatedText;
 
-                // Render LoL
+            
                 const lolGrid = document.getElementById('lol-grid');
                 if (data.lolTeam && data.lolTeam.length > 0) {
                     lolGrid.innerHTML = data.lolTeam.map(p => `
@@ -329,7 +329,7 @@
                     lolGrid.innerHTML = '<p style="color: var(--text-muted)">Czekam na pierwszą automatyczną synchronizację API...</p>';
                 }
 
-                // Render CS2
+              
                 const cs2Grid = document.getElementById('cs2-grid');
                 if (data.cs2Team && data.cs2Team.length > 0) {
                     cs2Grid.innerHTML = data.cs2Team.map(p => `
@@ -370,12 +370,11 @@
         const openBtn = document.getElementById('openBtn');
         const imgOverlay = document.getElementById('imgOverlay');
 
-        // Kliknięcie w guzik pokazuje nakładkę z grafiką
+       
         openBtn.addEventListener('click', () => {
             imgOverlay.style.display = 'flex';
         });
 
-        // Kliknięcie w dowolne miejsce nakładki (lub grafikę) ukrywa ją
         imgOverlay.addEventListener('click', () => {
             imgOverlay.style.display = 'none';
         });
