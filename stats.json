@@ -1,5 +1,5 @@
 {
-  "updatedAt": "23.07.2026, 10:34:36",
+  "updatedAt": "23.07.2026, 14:44:10",
   "lolTeam": [
     {
       "playerName": "Sitek",
@@ -7,9 +7,9 @@
       "accounts": [
         {
           "name": "Sit3k#Sit3k",
-          "currentElo": "DIAMOND IV (67 LP)",
+          "currentElo": "DIAMOND IV (63 LP)",
           "winrate": 51,
-          "games": 206
+          "games": 208
         },
         {
           "name": "S1 Siteek#EUNE",
@@ -54,7 +54,7 @@
       "role": "MEMBER",
       "accounts": [
         {
-          "name": "Areeone#Areeo ",
+          "name": "Areeone#Areeo",
           "currentElo": "PLATINUM IV (65 LP)",
           "winrate": 50,
           "games": 8
@@ -67,6 +67,78 @@
       "accounts": [
         {
           "name": "ZwyklyCWK#EUNE",
+          "currentElo": "Brak danych z API",
+          "winrate": 0,
+          "games": 0
+        }
+      ]
+    },
+    {
+      "playerName": "Smoky",
+      "role": "MEMBER",
+      "accounts": [
+        {
+          "name": "VanitasLighto#UwU",
+          "currentElo": "PLATINUM IV (80 LP)",
+          "winrate": 52,
+          "games": 48
+        }
+      ]
+    },
+    {
+      "playerName": "Samoreq",
+      "role": "MEMBER",
+      "accounts": [
+        {
+          "name": "Samoreq#EUNE",
+          "currentElo": "SILVER IV (55 LP)",
+          "winrate": 60,
+          "games": 5
+        }
+      ]
+    },
+    {
+      "playerName": "Jarzi",
+      "role": "MEMBER",
+      "accounts": [
+        {
+          "name": "-#-",
+          "currentElo": "Brak danych z API",
+          "winrate": 0,
+          "games": 0
+        }
+      ]
+    },
+    {
+      "playerName": "MCK",
+      "role": "MEMBER",
+      "accounts": [
+        {
+          "name": "MCKFigura#EUNE",
+          "currentElo": "Brak danych z API",
+          "winrate": 0,
+          "games": 0
+        }
+      ]
+    },
+    {
+      "playerName": "Gregor",
+      "role": "MEMBER",
+      "accounts": [
+        {
+          "name": "-#-",
+          "currentElo": "Brak danych z API",
+          "winrate": 0,
+          "games": 0
+        }
+      ]
+    },
+    {
+      "playerName": "Zywan",
+      "role": "MEMBER",
+      "accounts": [
+        {
+          "name": "-#-",
           "currentElo": "Brak danych z API",
           "winrate": 0,
           "games": 0
@@ -138,6 +210,84 @@
         "elo": 1645,
         "kd": "1.29",
         "winrate": "49"
+      }
+    },
+    {
+      "playerName": "Smoky",
+      "role": "MEMBER",
+      "premier": {
+        "rating": "BRAK"
+      },
+      "faceit": {
+        "level": "N/A",
+        "elo": 0,
+        "kd": "N/A",
+        "winrate": 0
+      }
+    },
+    {
+      "playerName": "Samoreq",
+      "role": "MEMBER",
+      "premier": {
+        "rating": "BRAK"
+      },
+      "faceit": {
+        "level": "N/A",
+        "elo": 0,
+        "kd": "N/A",
+        "winrate": 0
+      }
+    },
+    {
+      "playerName": "Jarzi",
+      "role": "MEMBER",
+      "premier": {
+        "rating": "BRAK"
+      },
+      "faceit": {
+        "level": "Level 6",
+        "elo": 1326,
+        "kd": "1.09",
+        "winrate": "49"
+      }
+    },
+    {
+      "playerName": "MCK",
+      "role": "MEMBER",
+      "premier": {
+        "rating": "BRAK"
+      },
+      "faceit": {
+        "level": "Level 3",
+        "elo": 793,
+        "kd": "0.72",
+        "winrate": "49"
+      }
+    },
+    {
+      "playerName": "Gregor",
+      "role": "MEMBER",
+      "premier": {
+        "rating": "BRAK"
+      },
+      "faceit": {
+        "level": "Level 2",
+        "elo": 652,
+        "kd": "0.87",
+        "winrate": "49"
+      }
+    },
+    {
+      "playerName": "Zywan",
+      "role": "MEMBER",
+      "premier": {
+        "rating": "BRAK"
+      },
+      "faceit": {
+        "level": "Level 7",
+        "elo": 1458,
+        "kd": "1.16",
+        "winrate": "50"
       }
     }
   ]
