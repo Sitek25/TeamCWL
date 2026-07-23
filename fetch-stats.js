@@ -199,13 +199,24 @@ async function fetchFaceitData(nickname) {
 
 async function fetchClashRoyaleData(tag) {
   if (!CLASH_ROYALE_API_KEY || !tag || tag === "-") return null;
-  try {
-    // Hasz (#) w tagu gracza musi być wyencodowany w URL jako %23
-    const formattedTag = tag.startsWith('#') ? tag.replace('#', '%23') : `%23${tag}`;
-    const headers = { Authorization: `Bearer ${CLASH_ROYALE_API_KEY}` };
 
-    const res = await fetch(`https://api.clashroyale.com/v1/players/${formattedTag}`, { headers });
-    if (!res.ok) return null;
+  try {
+    const cleanTag = tag.replace('#', '').trim();
+    const encodedTag = `%23${cleanTag}`;
+
+    const headers = { 
+      'Authorization': `Bearer ${CLASH_ROYALE_API_KEY}`,
+      'Accept': 'application/json'
+    };
+
+    // Zamiast api.clashroyale.com używamy proxy.royaleapi.dev
+    const res = await fetch(`https://proxy.royaleapi.dev/v1/players/${encodedTag}`, { headers });
+    
+    if (!res.ok) {
+      console.error(`Clash Royale API (Proxy) zwróciło status ${res.status} dla tagu ${tag}`);
+      return null;
+    }
+    
     const data = await res.json();
 
     return {
@@ -221,7 +232,6 @@ async function fetchClashRoyaleData(tag) {
     return null;
   }
 }
-
 async function main() {
   console.log("Rozpoczynanie pobierania danych z API...");
   const outputData = {
