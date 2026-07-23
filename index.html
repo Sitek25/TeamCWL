@@ -20,6 +20,8 @@
             --accent-lol-glow: rgba(200, 170, 110, 0.25);
             --accent-cs2: #f59e0b;
             --accent-cs2-glow: rgba(245, 158, 11, 0.25);
+            --accent-cr: #54a0ff;
+            --accent-cr-glow: rgba(84, 160, 255, 0.25);
             --accent-inne: #06b6d4;
             --accent-faceit: #ff5500;
         }
@@ -86,6 +88,7 @@
 
         nav button.active-lol { background: var(--accent-lol); color: #000; box-shadow: 0 0 15px var(--accent-lol-glow); }
         nav button.active-cs2 { background: var(--accent-cs2); color: #000; box-shadow: 0 0 15px var(--accent-cs2-glow); }
+        nav button.active-cr { background: var(--accent-cr); color: #000; box-shadow: 0 0 15px var(--accent-cr-glow); }
         nav button.active-inne { background: var(--accent-inne); color: #000; box-shadow: 0 0 15px rgba(6, 182, 212, 0.25); }
 
         main { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
@@ -201,7 +204,6 @@
             background-color: #0056b3;
         }
 
-        
         .image-overlay {
             display: none; 
             position: fixed;
@@ -216,7 +218,6 @@
             cursor: pointer; 
         }
 
-        /* Styl samej grafiki */
         .image-overlay img {
             max-width: 90%;
             max-height: 90%;
@@ -233,6 +234,7 @@
             <nav>
                 <button id="btn-lol" class="active-lol" onclick="changePage('lol')">League of Legends</button>
                 <button id="btn-cs2" onclick="changePage('cs2')">CS2 & Faceit</button>
+                <button id="btn-cr" onclick="changePage('cr')">Clash Royale</button>
                 <button id="btn-inne" onclick="changePage('inne')">Inne wkrótce</button>
             </nav>
         </div>
@@ -255,6 +257,14 @@
             <div class="team-grid" id="cs2-grid"></div>
         </section>
 
+        <section id="cr" class="page">
+            <div class="section-header">
+                <h2>Clash Royale</h2>
+                <div class="last-updated" id="cr-updated">Ostatnia synchronizacja: Ładowanie...</div>
+            </div>
+            <div class="team-grid" id="cr-grid"></div>
+        </section>
+
         <section id="inne" class="page">
             <div class="other-card">
                 <h2>W co gramy dalej?</h2>
@@ -268,9 +278,7 @@
       
     <button class="floating-btn" id="openBtn">+</button>
 
- 
     <div class="image-overlay" id="imgOverlay">
-        >
         <img src="guzikzdjecie.jpg" alt="Wyświetlana grafika">
     </div>
     </main>
@@ -300,8 +308,9 @@
                 const updatedText = "Ostatnia synchronizacja API: " + (data.updatedAt || 'Brak danych');
                 document.getElementById('lol-updated').innerText = updatedText;
                 document.getElementById('cs2-updated').innerText = updatedText;
+                document.getElementById('cr-updated').innerText = updatedText;
 
-            
+                // --- LOL GRID ---
                 const lolGrid = document.getElementById('lol-grid');
                 if (data.lolTeam && data.lolTeam.length > 0) {
                     lolGrid.innerHTML = data.lolTeam.map(p => `
@@ -329,7 +338,7 @@
                     lolGrid.innerHTML = '<p style="color: var(--text-muted)">Czekam na pierwszą automatyczną synchronizację API...</p>';
                 }
 
-              
+                // --- CS2 GRID ---
                 const cs2Grid = document.getElementById('cs2-grid');
                 if (data.cs2Team && data.cs2Team.length > 0) {
                     cs2Grid.innerHTML = data.cs2Team.map(p => `
@@ -361,6 +370,36 @@
                     cs2Grid.innerHTML = '<p style="color: var(--text-muted)">Czekam na pierwszą automatyczną synchronizację API...</p>';
                 }
 
+                // --- CLASH ROYALE GRID ---
+                const crGrid = document.getElementById('cr-grid');
+                if (data.clashRoyaleTeam && data.clashRoyaleTeam.length > 0) {
+                    crGrid.innerHTML = data.clashRoyaleTeam.map(p => `
+                        <div class="player-card">
+                            <div class="player-header">
+                                <span style="font-weight: 700; font-size: 1.2rem;">${p.playerName}</span>
+                                <span class="badge-role">${p.role}</span>
+                            </div>
+                            <div class="account-box">
+                                <div style="color: var(--accent-cr); font-weight: 700; font-size: 0.9rem;">
+                                    ${p.stats.ingameName || 'Brak konta'} <span style="color: var(--text-muted); font-size: 0.75rem;">(${p.tag})</span>
+                                </div>
+                                <div class="stat-grid">
+                                    <div><span class="stat-label">Puchary</span><span class="stat-value" style="color: var(--accent-cr)">🏆 ${p.stats.trophies}</span></div>
+                                    <div><span class="stat-label">Rekord pucharów</span><span class="stat-value">👑 ${p.stats.bestTrophies}</span></div>
+                                    <div><span class="stat-label">Wygrane mecze</span><span class="stat-value">⚔️ ${p.stats.wins}</span></div>
+                                    <div><span class="stat-label">Wygrane wojny</span><span class="stat-value">🛡️ ${p.stats.warDayWins}</span></div>
+                                    <div style="grid-column: span 2;">
+                                        <span class="stat-label">Klan</span>
+                                        <span class="stat-value">${p.stats.clan}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `).join('');
+                } else {
+                    crGrid.innerHTML = '<p style="color: var(--text-muted)">Czekam na pierwszą automatyczną synchronizację API...</p>';
+                }
+
             } catch (err) {
                 console.error("Błąd podczas ładowania stats.json:", err);
             }
@@ -370,7 +409,6 @@
         const openBtn = document.getElementById('openBtn');
         const imgOverlay = document.getElementById('imgOverlay');
 
-       
         openBtn.addEventListener('click', () => {
             imgOverlay.style.display = 'flex';
         });
