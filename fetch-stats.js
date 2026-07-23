@@ -3,7 +3,6 @@ import fs from 'fs';
 const RIOT_API_KEY = process.env.RIOT_API_KEY;
 const FACEIT_API_KEY = process.env.FACEIT_API_KEY;
 
-// KONFIGURACJA TWOJEJ DRUŻYNY (Edytuj nicki graczy)
 const PLAYERS_CONFIG = [
   {
     playerName: "Sitek",
@@ -15,7 +14,7 @@ const PLAYERS_CONFIG = [
     ],
     cs2: {
       faceitNickname: "SitekProgres",
-      premierRating: "BRAK" // Wartość ręczna (brak publicznego API do Valve Premier)
+      premierRating: "BRAK" 
     }
   },
   {
@@ -44,7 +43,7 @@ const PLAYERS_CONFIG = [
     playerName: "Areeone",
     role: "MEMBER",
     lolAccounts: [
-      { gameName: "Areeone", tagLine: "Areeo " }
+      { gameName: "Areeone", tagLine: "Areeo" }
     ],
     cs2: {
       faceitNickname: "Alfred3000",
@@ -61,19 +60,83 @@ const PLAYERS_CONFIG = [
       faceitNickname: "TurboTaco123",
       premierRating: "BRAK"
     }
-  }
-  
+  },
+    {
+    playerName: "Smoky",
+    role: "MEMBER",
+    lolAccounts: [
+      { gameName: "VanitasLighto", tagLine: "UwU" }
+    ],
+    cs2: {
+      faceitNickname: "-",
+      premierRating: "BRAK"
+    }
+  },
+      {
+    playerName: "Samoreq",
+    role: "MEMBER",
+    lolAccounts: [
+      { gameName: "Samoreq", tagLine: "EUNE" }
+    ],
+    cs2: {
+      faceitNickname: "-",
+      premierRating: "BRAK"
+    }
+  },
+        {
+    playerName: "Jarzi",
+    role: "MEMBER",
+    lolAccounts: [
+      { gameName: "-", tagLine: "-" }
+    ],
+    cs2: {
+      faceitNickname: "jarzers",
+      premierRating: "BRAK"
+    }
+  },
+         {
+    playerName: "MCK",
+    role: "MEMBER",
+    lolAccounts: [
+      { gameName: "MCKFigura", tagLine: "EUNE" }
+    ],
+    cs2: {
+      faceitNickname: "MCKFigura",
+      premierRating: "BRAK"
+    }
+  },
+           {
+    playerName: "Gregor",
+    role: "MEMBER",
+    lolAccounts: [
+      { gameName: "-", tagLine: "-" }
+    ],
+    cs2: {
+      faceitNickname: "cebul4czek",
+      premierRating: "BRAK"
+    }
+  },
+             {
+    playerName: "Zywan",
+    role: "MEMBER",
+    lolAccounts: [
+      { gameName: "-", tagLine: "-" }
+    ],
+    cs2: {
+      faceitNickname: "Zywan",
+      premierRating: "BRAK"
+    }
+  },
 ];
 
 async function fetchLoLAccountData(account) {
   if (!RIOT_API_KEY) return null;
   try {
-    // 1. Pobierz PUUID
+
     const accRes = await fetch(`https://europe.api.riotgames.com/riot/account/v1/accounts/by-riot-id/${account.gameName}/${account.tagLine}?api_key=${RIOT_API_KEY}`);
     if (!accRes.ok) return null;
     const accData = await accRes.json();
 
-    // 2. Pobierz Rangi
     const leagueRes = await fetch(`https://eun1.api.riotgames.com/lol/league/v4/entries/by-puuid/${accData.puuid}?api_key=${RIOT_API_KEY}`);
     if (!leagueRes.ok) return null;
     const leagueData = await leagueRes.json();
@@ -111,12 +174,11 @@ async function fetchFaceitData(nickname) {
   try {
     const headers = { Authorization: `Bearer ${FACEIT_API_KEY}` };
     
-    // 1. Pobierz profil gracza
+
     const playerRes = await fetch(`https://open.faceit.com/data/v4/players?nickname=${nickname}`, { headers });
     if (!playerRes.ok) return null;
     const playerData = await playerRes.json();
 
-    // 2. Pobierz statystyki CS2
     const statsRes = await fetch(`https://open.faceit.com/data/v4/players/${playerData.player_id}/stats/cs2`, { headers });
     const statsData = statsRes.ok ? await statsRes.json() : null;
 
@@ -141,7 +203,7 @@ async function main() {
   };
 
   for (const player of PLAYERS_CONFIG) {
-    // Ładowanie kont LoL
+
     const lolAccountsData = [];
     for (const acc of player.lolAccounts) {
       const data = await fetchLoLAccountData(acc);
@@ -156,7 +218,7 @@ async function main() {
       ]
     });
 
-    // Ładowanie CS2
+
     const faceitData = await fetchFaceitData(player.cs2.faceitNickname);
     outputData.cs2Team.push({
       playerName: player.playerName,
