@@ -1,5 +1,5 @@
 {
-  "updatedAt": "6.08.2026, 16:17:26",
+  "updatedAt": "7.08.2026, 02:04:03",
   "lolTeam": [
     {
       "playerName": "Sitek",
@@ -13,9 +13,9 @@
         },
         {
           "name": "S1 Siteek#EUNE",
-          "currentElo": "EMERALD IV (43 LP)",
-          "winrate": 48,
-          "games": 149
+          "currentElo": "EMERALD III (20 LP)",
+          "winrate": 49,
+          "games": 153
         },
         {
           "name": "eGirl from Dream#EUNE",
@@ -31,9 +31,9 @@
       "accounts": [
         {
           "name": "LACOST#CWL",
-          "currentElo": "PLATINUM IV (26 LP)",
-          "winrate": 50,
-          "games": 212
+          "currentElo": "PLATINUM III (2 LP)",
+          "winrate": 51,
+          "games": 216
         }
       ]
     },
