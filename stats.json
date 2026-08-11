@@ -1,5 +1,5 @@
 {
-  "updatedAt": "10.08.2026, 21:00:25",
+  "updatedAt": "11.08.2026, 03:54:51",
   "lolTeam": [
     {
       "playerName": "Sitek",
@@ -7,9 +7,9 @@
       "accounts": [
         {
           "name": "Sit3k#Sit3k",
-          "currentElo": "DIAMOND III (60 LP)",
-          "winrate": 52,
-          "games": 235
+          "currentElo": "DIAMOND II (34 LP)",
+          "winrate": 53,
+          "games": 240
         },
         {
           "name": "S1 Siteek#EUNE",
