@@ -1,5 +1,5 @@
 {
-  "updatedAt": "15.08.2026, 03:21:16",
+  "updatedAt": "15.08.2026, 08:41:13",
   "lolTeam": [
     {
       "playerName": "Sitek",
@@ -7,21 +7,9 @@
       "accounts": [
         {
           "name": "Sit3k#Sit3k",
-          "currentElo": "DIAMOND II (3 LP)",
-          "winrate": 52,
-          "games": 247
-        },
-        {
-          "name": "S1 Siteek#EUNE",
-          "currentElo": "EMERALD III (15 LP)",
-          "winrate": 49,
-          "games": 159
-        },
-        {
-          "name": "eGirl from Dream#EUNE",
-          "currentElo": "EMERALD IV (66 LP)",
-          "winrate": 46,
-          "games": 83
+          "currentElo": "Brak danych z API",
+          "winrate": 0,
+          "games": 0
         }
       ]
     },
@@ -31,9 +19,9 @@
       "accounts": [
         {
           "name": "LACOST#CWL",
-          "currentElo": "PLATINUM IV (96 LP)",
-          "winrate": 51,
-          "games": 222
+          "currentElo": "Brak danych z API",
+          "winrate": 0,
+          "games": 0
         }
       ]
     },
@@ -43,9 +31,9 @@
       "accounts": [
         {
           "name": "jawnogrzesznica#Paczu",
-          "currentElo": "DIAMOND III (31 LP)",
-          "winrate": 55,
-          "games": 113
+          "currentElo": "Brak danych z API",
+          "winrate": 0,
+          "games": 0
         }
       ]
     },
@@ -55,9 +43,9 @@
       "accounts": [
         {
           "name": "Areeone#Areeo",
-          "currentElo": "PLATINUM IV (65 LP)",
-          "winrate": 50,
-          "games": 8
+          "currentElo": "Brak danych z API",
+          "winrate": 0,
+          "games": 0
         }
       ]
     },
@@ -79,9 +67,9 @@
       "accounts": [
         {
           "name": "VanitasLighto#UwU",
-          "currentElo": "PLATINUM IV (80 LP)",
-          "winrate": 52,
-          "games": 48
+          "currentElo": "Brak danych z API",
+          "winrate": 0,
+          "games": 0
         }
       ]
     },
@@ -91,9 +79,9 @@
       "accounts": [
         {
           "name": "Samoreq#EUNE",
-          "currentElo": "SILVER IV (55 LP)",
-          "winrate": 60,
-          "games": 5
+          "currentElo": "Brak danych z API",
+          "winrate": 0,
+          "games": 0
         }
       ]
     },
@@ -155,7 +143,7 @@
       },
       "faceit": {
         "level": "Level 8",
-        "elo": 1617,
+        "elo": 1588,
         "kd": "0.94",
         "winrate": "51"
       }
@@ -194,7 +182,7 @@
       },
       "faceit": {
         "level": "Level 6",
-        "elo": 1337,
+        "elo": 1313,
         "kd": "1.1",
         "winrate": "49"
       }
@@ -206,10 +194,10 @@
         "rating": "BRAK"
       },
       "faceit": {
-        "level": "Level 9",
-        "elo": 1760,
+        "level": "Level 8",
+        "elo": 1734,
         "kd": "1.29",
-        "winrate": "50"
+        "winrate": "49"
       }
     },
     {
