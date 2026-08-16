@@ -1,5 +1,5 @@
 {
-  "updatedAt": "16.08.2026, 14:42:28",
+  "updatedAt": "16.08.2026, 20:32:01",
   "lolTeam": [
     {
       "playerName": "Sitek",
@@ -7,9 +7,9 @@
       "accounts": [
         {
           "name": "Sit3k#Sit3k",
-          "currentElo": "DIAMOND II (59 LP)",
+          "currentElo": "DIAMOND II (57 LP)",
           "winrate": 53,
-          "games": 250
+          "games": 252
         },
         {
           "name": "S1 Siteek#EUNE",
@@ -155,9 +155,9 @@
       },
       "faceit": {
         "level": "Level 8",
-        "elo": 1588,
+        "elo": 1559,
         "kd": "0.94",
-        "winrate": "51"
+        "winrate": "50"
       }
     },
     {
@@ -168,7 +168,7 @@
       },
       "faceit": {
         "level": "Level 6",
-        "elo": 1238,
+        "elo": 1239,
         "kd": "0.91",
         "winrate": "51"
       }
@@ -194,7 +194,7 @@
       },
       "faceit": {
         "level": "Level 6",
-        "elo": 1313,
+        "elo": 1321,
         "kd": "1.1",
         "winrate": "49"
       }
@@ -207,7 +207,7 @@
       },
       "faceit": {
         "level": "Level 8",
-        "elo": 1734,
+        "elo": 1710,
         "kd": "1.29",
         "winrate": "49"
       }
