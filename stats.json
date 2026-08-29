@@ -1,5 +1,5 @@
 {
-  "updatedAt": "29.08.2026, 18:23:59",
+  "updatedAt": "29.08.2026, 22:37:24",
   "lolTeam": [
     {
       "playerName": "Sitek",
@@ -43,9 +43,9 @@
       "accounts": [
         {
           "name": "jawnogrzesznica#Paczu",
-          "currentElo": "DIAMOND III (3 LP)",
-          "winrate": 55,
-          "games": 114
+          "currentElo": "DIAMOND III (51 LP)",
+          "winrate": 56,
+          "games": 115
         }
       ]
     },
@@ -168,9 +168,9 @@
       },
       "faceit": {
         "level": "Level 6",
-        "elo": 1206,
+        "elo": 1237,
         "kd": "0.91",
-        "winrate": "50"
+        "winrate": "51"
       }
     },
     {
@@ -194,7 +194,7 @@
       },
       "faceit": {
         "level": "Level 7",
-        "elo": 1369,
+        "elo": 1395,
         "kd": "1.11",
         "winrate": "49"
       }
@@ -207,7 +207,7 @@
       },
       "faceit": {
         "level": "Level 9",
-        "elo": 1794,
+        "elo": 1821,
         "kd": "1.29",
         "winrate": "50"
       }
@@ -246,7 +246,7 @@
       },
       "faceit": {
         "level": "Level 7",
-        "elo": 1471,
+        "elo": 1500,
         "kd": "1.09",
         "winrate": "49"
       }
