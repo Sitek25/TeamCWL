@@ -1,5 +1,5 @@
 {
-  "updatedAt": "4.09.2026, 22:28:02",
+  "updatedAt": "5.09.2026, 05:33:46",
   "lolTeam": [
     {
       "playerName": "Sitek",
@@ -7,15 +7,15 @@
       "accounts": [
         {
           "name": "Sit3k#Sit3k",
-          "currentElo": "MASTER I (11 LP)",
-          "winrate": 54,
-          "games": 295
+          "currentElo": "DIAMOND I (54 LP)",
+          "winrate": 53,
+          "games": 298
         },
         {
           "name": "S1 Siteek#EUNE",
-          "currentElo": "EMERALD II (2 LP)",
+          "currentElo": "EMERALD II (42 LP)",
           "winrate": 51,
-          "games": 176
+          "games": 178
         },
         {
           "name": "eGirl from Dream#EUNE",
@@ -154,8 +154,8 @@
         "rating": "BRAK"
       },
       "faceit": {
-        "level": "Level 8",
-        "elo": 1554,
+        "level": "Level 7",
+        "elo": 1528,
         "kd": "0.94",
         "winrate": "50"
       }
@@ -194,7 +194,7 @@
       },
       "faceit": {
         "level": "Level 8",
-        "elo": 1599,
+        "elo": 1575,
         "kd": "1.11",
         "winrate": "49"
       }
@@ -207,9 +207,9 @@
       },
       "faceit": {
         "level": "Level 9",
-        "elo": 1812,
+        "elo": 1789,
         "kd": "1.29",
-        "winrate": "50"
+        "winrate": "49"
       }
     },
     {
@@ -246,8 +246,8 @@
       },
       "faceit": {
         "level": "Level 7",
-        "elo": 1468,
-        "kd": "1.09",
+        "elo": 1448,
+        "kd": "1.1",
         "winrate": "49"
       }
     },
@@ -284,8 +284,8 @@
         "rating": "BRAK"
       },
       "faceit": {
-        "level": "Level 8",
-        "elo": 1543,
+        "level": "Level 7",
+        "elo": 1493,
         "kd": "1.17",
         "winrate": "50"
       }
