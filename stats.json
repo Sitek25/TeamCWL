@@ -1,5 +1,5 @@
 {
-  "updatedAt": "14.09.2026, 23:37:46",
+  "updatedAt": "15.09.2026, 05:58:45",
   "lolTeam": [
     {
       "playerName": "Sitek",
@@ -154,8 +154,8 @@
         "rating": "BRAK"
       },
       "faceit": {
-        "level": "Level 7",
-        "elo": 1490,
+        "level": "Level 8",
+        "elo": 1569,
         "kd": "0.94",
         "winrate": "50"
       }
@@ -194,7 +194,7 @@
       },
       "faceit": {
         "level": "Level 8",
-        "elo": 1572,
+        "elo": 1650,
         "kd": "1.11",
         "winrate": "49"
       }
@@ -246,7 +246,7 @@
       },
       "faceit": {
         "level": "Level 7",
-        "elo": 1448,
+        "elo": 1498,
         "kd": "1.09",
         "winrate": "49"
       }
@@ -284,8 +284,8 @@
         "rating": "BRAK"
       },
       "faceit": {
-        "level": "Level 6",
-        "elo": 1333,
+        "level": "Level 7",
+        "elo": 1406,
         "kd": "1.17",
         "winrate": "49"
       }
