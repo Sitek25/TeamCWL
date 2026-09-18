@@ -1,5 +1,5 @@
 {
-  "updatedAt": "18.09.2026, 18:02:26",
+  "updatedAt": "18.09.2026, 22:35:55",
   "lolTeam": [
     {
       "playerName": "Sitek",
@@ -207,7 +207,7 @@
       },
       "faceit": {
         "level": "Level 9",
-        "elo": 1881,
+        "elo": 1863,
         "kd": "1.3",
         "winrate": "50"
       }
@@ -246,9 +246,9 @@
       },
       "faceit": {
         "level": "Level 8",
-        "elo": 1560,
-        "kd": "1.1",
-        "winrate": "50"
+        "elo": 1537,
+        "kd": "1.09",
+        "winrate": "49"
       }
     },
     {
@@ -285,7 +285,7 @@
       },
       "faceit": {
         "level": "Level 7",
-        "elo": 1455,
+        "elo": 1440,
         "kd": "1.17",
         "winrate": "50"
       }
