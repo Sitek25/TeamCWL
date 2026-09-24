@@ -1,5 +1,5 @@
 {
-  "updatedAt": "24.09.2026, 13:20:04",
+  "updatedAt": "24.09.2026, 18:44:30",
   "lolTeam": [
     {
       "playerName": "Sitek",
@@ -19,9 +19,9 @@
         },
         {
           "name": "eGirl from Dream#EUNE",
-          "currentElo": "EMERALD IV (61 LP)",
+          "currentElo": "EMERALD IV (77 LP)",
           "winrate": 46,
-          "games": 83
+          "games": 85
         }
       ]
     },
