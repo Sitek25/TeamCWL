@@ -1,5 +1,5 @@
 {
-  "updatedAt": "24.09.2026, 18:44:30",
+  "updatedAt": "24.09.2026, 23:16:56",
   "lolTeam": [
     {
       "playerName": "Sitek",
@@ -7,9 +7,9 @@
       "accounts": [
         {
           "name": "Sit3k#Sit3k",
-          "currentElo": "MASTER I (67 LP)",
-          "winrate": 53,
-          "games": 320
+          "currentElo": "MASTER I (97 LP)",
+          "winrate": 54,
+          "games": 321
         },
         {
           "name": "S1 Siteek#EUNE",
@@ -19,9 +19,9 @@
         },
         {
           "name": "eGirl from Dream#EUNE",
-          "currentElo": "EMERALD IV (77 LP)",
-          "winrate": 46,
-          "games": 85
+          "currentElo": "EMERALD IV (95 LP)",
+          "winrate": 47,
+          "games": 86
         }
       ]
     },
@@ -155,7 +155,7 @@
       },
       "faceit": {
         "level": "Level 7",
-        "elo": 1478,
+        "elo": 1493,
         "kd": "0.94",
         "winrate": "50"
       }
@@ -168,7 +168,7 @@
       },
       "faceit": {
         "level": "Level 6",
-        "elo": 1220,
+        "elo": 1235,
         "kd": "0.91",
         "winrate": "50"
       }
@@ -206,8 +206,8 @@
         "rating": "BRAK"
       },
       "faceit": {
-        "level": "Level 8",
-        "elo": 1745,
+        "level": "Level 9",
+        "elo": 1763,
         "kd": "1.29",
         "winrate": "49"
       }
@@ -246,7 +246,7 @@
       },
       "faceit": {
         "level": "Level 7",
-        "elo": 1414,
+        "elo": 1434,
         "kd": "1.09",
         "winrate": "49"
       }
@@ -259,9 +259,9 @@
       },
       "faceit": {
         "level": "Level 2",
-        "elo": 620,
+        "elo": 637,
         "kd": "0.73",
-        "winrate": "47"
+        "winrate": "48"
       }
     },
     {
