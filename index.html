@@ -1,421 +1,641 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="pl" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Team Dashboard</title>
+    <title>TeamCWL - Esports Leaderboard & Analytics Hub</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter & Orbitron -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-    
-    <style>
-        :root {
-            --bg-body: #0d0f12;
-            --bg-card: rgba(22, 26, 33, 0.75);
-            --bg-card-hover: rgba(30, 36, 46, 0.9);
-            --border-color: rgba(255, 255, 255, 0.08);
-            --text-main: #f1f5f9;
-            --text-muted: #94a3b8;
-            --accent-lol: #c8aa6e;
-            --accent-lol-glow: rgba(200, 170, 110, 0.25);
-            --accent-cs2: #f59e0b;
-            --accent-cs2-glow: rgba(245, 158, 11, 0.25);
-            --accent-cr: #54a0ff;
-            --accent-cr-glow: rgba(84, 160, 255, 0.25);
-            --accent-inne: #06b6d4;
-            --accent-faceit: #ff5500;
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Orbitron:wght@600;800;900&display=swap" rel="stylesheet">
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0f3ff',
+                            100: '#e0e7ff',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            accent: '#06b6d4',
+                            glow: '#3b82f6',
+                            gold: '#fbbf24',
+                            silver: '#9ca3af',
+                            bronze: '#d97706'
+                        },
+                        darkbg: '#090d16',
+                        darkcard: '#111827',
+                        glassborder: 'rgba(255, 255, 255, 0.08)'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Orbitron', 'sans-serif'],
+                    }
+                }
+            }
         }
+    </script>
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-
+    <style>
         body {
-            background-color: var(--bg-body);
-            color: var(--text-main);
-            min-height: 100vh;
+            background-color: #070a11;
+            color: #f3f4f6;
+            font-family: 'Inter', sans-serif;
             background-image: 
-                radial-gradient(circle at 20% 10%, rgba(200, 170, 110, 0.05) 0%, transparent 40%),
-                radial-gradient(circle at 80% 80%, rgba(245, 158, 11, 0.05) 0%, transparent 40%);
+                radial-gradient(circle at 15% 20%, rgba(99, 102, 241, 0.12) 0%, transparent 40%),
+                radial-gradient(circle at 85% 60%, rgba(6, 182, 212, 0.1) 0%, transparent 40%);
             background-attachment: fixed;
         }
 
-        header {
-            position: sticky;
-            top: 0;
-            backdrop-filter: blur(16px);
-            background: rgba(13, 15, 18, 0.8);
-            border-bottom: 1px solid var(--border-color);
-            z-index: 1000;
-            padding: 15px 20px;
+        .font-display {
+            font-family: 'Orbitron', sans-serif;
         }
 
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        .glass-card {
+            background: rgba(17, 24, 39, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
         }
 
-        .logo {
-            font-weight: 800;
-            font-size: 1.2rem;
-            letter-spacing: 1px;
-            background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .glass-card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        nav {
-            display: flex;
-            gap: 10px;
-            background: rgba(0, 0, 0, 0.3);
-            padding: 5px;
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
+        .glass-card-hover:hover {
+            border-color: rgba(99, 102, 241, 0.4);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.15);
         }
 
-        nav button {
-            background: transparent;
-            border: none;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            font-weight: 600;
-            padding: 10px 20px;
-            cursor: pointer;
-            transition: all 0.25s ease;
-            border-radius: 8px;
+        .neon-glow-text {
+            text-shadow: 0 0 15px rgba(99, 102, 241, 0.6);
         }
 
-        nav button.active-lol { background: var(--accent-lol); color: #000; box-shadow: 0 0 15px var(--accent-lol-glow); }
-        nav button.active-cs2 { background: var(--accent-cs2); color: #000; box-shadow: 0 0 15px var(--accent-cs2-glow); }
-        nav button.active-cr { background: var(--accent-cr); color: #000; box-shadow: 0 0 15px var(--accent-cr-glow); }
-        nav button.active-inne { background: var(--accent-inne); color: #000; box-shadow: 0 0 15px rgba(6, 182, 212, 0.25); }
-
-        main { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
-
-        .page { display: none; animation: fadeIn 0.4s ease-out; }
-        .page.active { display: block; }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(12px); }
-            to { opacity: 1; transform: translateY(0); }
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #090d16;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1f2937;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #374151;
         }
 
-        .section-header { margin-bottom: 30px; }
-        .last-updated { color: var(--text-muted); font-size: 0.85rem; margin-top: 6px; }
-
-        .team-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-            gap: 24px;
+        @keyframes aura-pulse {
+            0%, 100% { box-shadow: 0 0 15px rgba(251, 191, 36, 0.2); }
+            50% { box-shadow: 0 0 30px rgba(251, 191, 36, 0.4); }
         }
-
-        .player-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 24px;
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-            transition: transform 0.2s ease;
-        }
-
-        .player-card:hover { transform: translateY(-4px); background: var(--bg-card-hover); }
-
-        .player-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 12px;
-        }
-
-        .badge-role {
-            font-size: 0.75rem;
-            font-weight: 700;
-            padding: 4px 10px;
-            border-radius: 20px;
-            background: rgba(255, 255, 255, 0.06);
-            color: var(--text-muted);
-            border: 1px solid var(--border-color);
-        }
-
-        .account-box {
-            background: rgba(0, 0, 0, 0.25);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
-            padding: 16px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 0.85rem; }
-        .stat-label { color: var(--text-muted); font-size: 0.75rem; display: block; }
-        .stat-value { font-weight: 600; }
-
-        .progress-bar-bg { height: 6px; background: rgba(255, 255, 255, 0.1); border-radius: 3px; margin-top: 4px; }
-        .progress-bar-fill { height: 100%; background: #10b981; border-radius: 3px; }
-
-        .other-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
-            padding: 50px 30px;
-            text-align: center;
-            max-width: 600px;
-            margin: 40px auto 0;
-        }
-
-        .form-group { display: flex; gap: 10px; margin-top: 24px; }
-        .form-group input {
-            flex: 1; padding: 14px 18px; border-radius: 10px;
-            border: 1px solid var(--border-color); background: rgba(0,0,0,0.4);
-            color: #fff; font-size: 0.95rem; outline: none;
-        }
-        .form-group button {
-            padding: 14px 28px; border-radius: 10px; border: none;
-            background: var(--accent-inne); color: #000; font-weight: 700; cursor: pointer;
-        }
-
-        @media (max-width: 640px) {
-            .nav-container { flex-direction: column; gap: 15px; }
-            .form-group { flex-direction: column; }
-        }
-        .floating-btn {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            padding: 12px 24px;
-            background-color: #007BFF;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            font-family: sans-serif;
-            font-weight: bold;
-            z-index: 1000;
-            transition: background 0.2s;
-        }
-
-        .floating-btn:hover {
-            background-color: #0056b3;
-        }
-
-        .image-overlay {
-            display: none; 
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7); 
-            justify-content: center;
-            align-items: center;
-            z-index: 2000;
-            cursor: pointer; 
-        }
-
-        .image-overlay img {
-            max-width: 90%;
-            max-height: 90%;
-            border-radius: 8px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+        .rank-1-aura {
+            animation: aura-pulse 3s infinite;
         }
     </style>
 </head>
-<body>
+<body class="min-h-screen flex flex-col justify-between selection:bg-brand-500 selection:text-white">
 
-    <header>
-        <div class="nav-container">
-            <div class="logo">CWL // DASHBOARD</div>
-            <nav>
-                <button id="btn-lol" class="active-lol" onclick="changePage('lol')">League of Legends</button>
-                <button id="btn-cs2" onclick="changePage('cs2')">CS2 & Faceit</button>
-                <button id="btn-cr" onclick="changePage('cr')">Clash Royale</button>
-                <button id="btn-inne" onclick="changePage('inne')">Inne wkrótce</button>
-            </nav>
+    <!-- NAVIGATION BAR -->
+    <header class="sticky top-0 z-40 border-b border-gray-800/80 bg-darkbg/80 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="resetFilters()">
+                <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-brand-600 to-brand-accent p-0.5 flex items-center justify-center shadow-lg shadow-brand-500/20">
+                    <div class="w-full h-full bg-darkbg rounded-[10px] flex items-center justify-center">
+                        <i class="fa-solid font-display text-transparent bg-clip-text bg-gradient-to-r from-brand-500 to-brand-accent text-xl font-black">CWL</i>
+                    </div>
+                </div>
+                <div>
+                    <span class="font-display font-black text-2xl tracking-wider text-white neon-glow-text">TEAM<span class="text-brand-accent">CWL</span></span>
+                    <span class="block text-[10px] tracking-widest text-gray-400 font-semibold uppercase -mt-1">Esports League & Hub</span>
+                </div>
+            </div>
+
+            <!-- Global Search Bar -->
+            <div class="hidden md:flex items-center relative w-72">
+                <i class="fa-solid fa-magnifying-glass absolute left-3.5 text-gray-400 text-sm"></i>
+                <input type="text" id="searchInput" placeholder="Szukaj gracza..." 
+                    class="w-full bg-gray-900/90 border border-gray-700/60 focus:border-brand-500 text-sm text-gray-200 rounded-xl pl-10 pr-4 py-2 outline-none transition duration-200 placeholder-gray-500">
+            </div>
+
+            <!-- Quick Navigation Stats -->
+            <div class="flex items-center space-x-3 sm:space-x-6 text-sm">
+                <button onclick="refreshApiData()" class="bg-gray-800 hover:bg-gray-700 text-gray-300 border border-gray-700 px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center space-x-1.5 transition">
+                    <i class="fa-solid fa-rotate-right" id="refreshIcon"></i>
+                    <span>Odśwież API</span>
+                </button>
+                <button onclick="scrollToSection('leaderboard')" class="text-gray-300 hover:text-white font-medium text-xs sm:text-sm transition">Ranking</button>
+                <button onclick="openRulesModal()" class="bg-brand-600/20 hover:bg-brand-600/40 text-brand-500 border border-brand-500/30 px-3.5 py-1.5 rounded-lg font-medium text-xs sm:text-sm transition flex items-center space-x-1.5">
+                    <i class="fa-solid fa-scroll"></i>
+                    <span>Zasady</span>
+                </button>
+            </div>
         </div>
     </header>
 
-    <main>
-        <section id="lol" class="page active">
-            <div class="section-header">
-                <h2>League of Legends</h2>
-                <div class="last-updated" id="lol-updated">Ostatnia synchronizacja: Ładowanie...</div>
-            </div>
-            <div class="team-grid" id="lol-grid"></div>
-        </section>
+    <!-- MAIN CONTAINER -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow w-full">
 
-        <section id="cs2" class="page">
-            <div class="section-header">
-                <h2>CS2 & Faceit</h2>
-                <div class="last-updated" id="cs2-updated">Ostatnia synchronizacja: Ładowanie...</div>
+        <!-- KEY STATS OVERVIEW CARDS -->
+        <section class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+            <div class="glass-card p-5 rounded-2xl relative overflow-hidden group">
+                <p class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1">Aktywni Gracze</p>
+                <h3 class="text-2xl sm:text-3xl font-black font-display text-white" id="statTotalPlayers">--</h3>
+                <div class="mt-2 flex items-center text-xs text-emerald-400">
+                    <i class="fa-solid fa-arrow-trend-up mr-1"></i>
+                    <span>Pobrani z API</span>
+                </div>
             </div>
-            <div class="team-grid" id="cs2-grid"></div>
-        </section>
 
-        <section id="cr" class="page">
-            <div class="section-header">
-                <h2>Clash Royale</h2>
-                <div class="last-updated" id="cr-updated">Ostatnia synchronizacja: Ładowanie...</div>
+            <div class="glass-card p-5 rounded-2xl relative overflow-hidden group">
+                <p class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1">Rozegrane Mecze</p>
+                <h3 class="text-2xl sm:text-3xl font-black font-display text-white" id="statTotalMatches">--</h3>
+                <div class="mt-2 flex items-center text-xs text-brand-accent">
+                    <i class="fa-solid fa-bolt mr-1"></i>
+                    <span>Suma meczów</span>
+                </div>
             </div>
-            <div class="team-grid" id="cr-grid"></div>
-        </section>
 
-        <section id="inne" class="page">
-            <div class="other-card">
-                <h2>W co gramy dalej?</h2>
-                <p style="color: var(--text-muted); margin-top: 8px;">Jaka gra powinna być następna na naszym dashboardzie?</p>
-                <div class="form-group">
-                    <input type="text" id="next-game-input" placeholder="np. Valorant, Rocket League...">
-                    <button onclick="submitNextGame()">Wyślij</button>
+            <div class="glass-card p-5 rounded-2xl relative overflow-hidden group">
+                <p class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1">Lider ELO</p>
+                <h3 class="text-2xl sm:text-3xl font-black font-display text-brand-gold" id="statTopPlayer">--</h3>
+                <div class="mt-2 flex items-center text-xs text-amber-400" id="statTopPlayerElo">
+                    <span>-- ELO</span>
+                </div>
+            </div>
+
+            <div class="glass-card p-5 rounded-2xl relative overflow-hidden group">
+                <p class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1">Średnia ELO</p>
+                <h3 class="text-2xl sm:text-3xl font-black font-display text-purple-400" id="statAvgElo">--</h3>
+                <div class="mt-2 flex items-center text-xs text-purple-300">
+                    <i class="fa-solid fa-chart-line mr-1"></i>
+                    <span>Średnia zespołu</span>
                 </div>
             </div>
         </section>
-      
-    <button class="floating-btn" id="openBtn">+</button>
 
-    <div class="image-overlay" id="imgOverlay">
-        <img src="guzikzdjecie.jpg" alt="Wyświetlana grafika">
-    </div>
+        <!-- GAME TABS AND FILTERS BAR -->
+        <section class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 mb-6">
+            <div class="flex items-center space-x-2 overflow-x-auto pb-2 lg:pb-0 scrollbar-none" id="gameTabs">
+                <button data-game="ALL" class="game-tab bg-gradient-to-r from-brand-600 to-brand-500 text-white font-semibold text-xs sm:text-sm px-4 py-2.5 rounded-xl border border-brand-400/30 whitespace-nowrap shadow-lg shadow-brand-500/20 flex items-center space-x-2">
+                    <i class="fa-solid fa-globe"></i>
+                    <span>Wszystkie Gry</span>
+                </button>
+                <button data-game="CS2" class="game-tab bg-gray-900/80 hover:bg-gray-800 text-gray-300 hover:text-white font-medium text-xs sm:text-sm px-4 py-2.5 rounded-xl border border-gray-800 whitespace-nowrap transition flex items-center space-x-2">
+                    <i class="fa-solid fa-crosshairs text-orange-400"></i>
+                    <span>CS2 / FACEIT</span>
+                </button>
+                <button data-game="LOL" class="game-tab bg-gray-900/80 hover:bg-gray-800 text-gray-300 hover:text-white font-medium text-xs sm:text-sm px-4 py-2.5 rounded-xl border border-gray-800 whitespace-nowrap transition flex items-center space-x-2">
+                    <i class="fa-solid fa-shield-halved text-blue-400"></i>
+                    <span>League of Legends</span>
+                </button>
+            </div>
+
+            <div class="flex items-center space-x-3 w-full lg:w-auto">
+                <div class="flex md:hidden items-center relative flex-1">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3 text-gray-400 text-xs"></i>
+                    <input type="text" id="mobileSearchInput" placeholder="Szukaj..." 
+                        class="w-full bg-gray-900/90 border border-gray-700/60 text-xs text-gray-200 rounded-xl pl-9 pr-3 py-2 outline-none">
+                </div>
+
+                <div class="flex items-center space-x-2 bg-gray-900/80 px-3 py-2 rounded-xl border border-gray-800">
+                    <i class="fa-solid fa-arrow-down-wide-short text-gray-400 text-xs"></i>
+                    <select id="sortSelect" class="bg-transparent text-xs text-gray-200 font-medium outline-none cursor-pointer">
+                        <option value="elo_desc" class="bg-gray-900">ELO (Najwyższe)</option>
+                        <option value="elo_asc" class="bg-gray-900">ELO (Najniższe)</option>
+                        <option value="winrate_desc" class="bg-gray-900">Win Rate %</option>
+                        <option value="wins_desc" class="bg-gray-900">Wygrane Mecze</option>
+                        <option value="streak_desc" class="bg-gray-900">Seria Wygranych</option>
+                    </select>
+                </div>
+            </div>
+        </section>
+
+        <!-- TOP 3 PODIUM DISPLAY -->
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8" id="podiumSection">
+            <!-- Dynamicznie generowane Podium -->
+        </section>
+
+        <!-- LEADERBOARD TABLE SECTION -->
+        <section id="leaderboard" class="glass-card rounded-2xl overflow-hidden mb-12 shadow-2xl">
+            <div class="p-5 border-b border-gray-800/80 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
+                <div>
+                    <h2 class="font-display font-bold text-lg text-white flex items-center space-x-2">
+                        <i class="fa-solid fa-ranking-star text-brand-accent"></i>
+                        <span>Główny Ranking Członków TeamCWL</span>
+                    </h2>
+                    <p class="text-xs text-gray-400">Dane pobierane dynamicznie z pliku fetch-stats.js</p>
+                </div>
+                <div class="text-xs text-gray-400 bg-gray-900/60 px-3 py-1.5 rounded-lg border border-gray-800">
+                    Wyświetlanie: <strong class="text-gray-200" id="visibleCount">0</strong> graczy
+                </div>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-sm text-gray-300">
+                    <thead class="bg-gray-900/70 text-xs uppercase font-semibold text-gray-400 border-b border-gray-800 tracking-wider">
+                        <tr>
+                            <th scope="col" class="py-4 px-4 text-center w-16">#</th>
+                            <th scope="col" class="py-4 px-4">Gracz</th>
+                            <th scope="col" class="py-4 px-4 text-center">Główne Konto</th>
+                            <th scope="col" class="py-4 px-4 text-right">ELO</th>
+                            <th scope="col" class="py-4 px-4 text-center">W / L</th>
+                            <th scope="col" class="py-4 px-4 text-center">Win Rate</th>
+                            <th scope="col" class="py-4 px-4 text-center">Seria</th>
+                            <th scope="col" class="py-4 px-4 text-center">Akcja</th>
+                        </tr>
+                    </thead>
+                    <tbody id="leaderboardBody" class="divide-y divide-gray-800/50">
+                        <!-- Rzędy ładowane z JS/API -->
+                    </tbody>
+                </table>
+            </div>
+            
+            <div id="loadingState" class="p-12 text-center">
+                <i class="fa-solid fa-spinner fa-spin text-3xl text-brand-accent mb-3"></i>
+                <p class="text-gray-400 text-sm">Pobieranie statystyk z API...</p>
+            </div>
+
+            <div id="noResults" class="hidden p-12 text-center">
+                <i class="fa-solid fa-user-slash text-4xl text-gray-600 mb-3"></i>
+                <p class="text-gray-400 text-sm">Nie znaleziono graczy spełniających kryteria.</p>
+            </div>
+        </section>
+
     </main>
 
+    <!-- PLAYER DETAIL MODAL -->
+    <div id="playerModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm hidden opacity-0 transition-opacity duration-300">
+        <div class="glass-card bg-gray-900 border border-gray-700/80 rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl relative p-6 transform scale-95 transition-transform duration-300" id="playerModalContent">
+            <button onclick="closePlayerModal()" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-gray-800 hover:bg-gray-700 text-gray-400 hover:text-white flex items-center justify-center transition">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <div class="flex flex-col sm:flex-row items-start sm:items-center space-y-4 sm:space-y-0 sm:space-x-5 pb-6 border-b border-gray-800">
+                <div class="relative">
+                    <img id="modalAvatar" src="" alt="Avatar" class="w-20 h-20 rounded-2xl object-cover border-2 border-brand-500 shadow-lg">
+                    <span id="modalRankBadge" class="absolute -bottom-2 -right-2 bg-brand-gold text-gray-950 text-xs font-black px-2 py-0.5 rounded-md font-display shadow-md">#1</span>
+                </div>
+                <div>
+                    <div class="flex items-center space-x-3">
+                        <h2 id="modalPlayerName" class="font-display font-black text-2xl text-white">PlayerName</h2>
+                        <span id="modalGameTag" class="text-xs font-semibold px-2.5 py-1 rounded-md bg-gray-800 text-brand-accent border border-gray-700">CS2</span>
+                    </div>
+                    <p id="modalRole" class="text-xs text-gray-400 mt-1"><i class="fa-solid fa-user-gear mr-1"></i> Rola: MEMBER</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 my-6">
+                <div class="bg-gray-800/50 p-3 rounded-xl border border-gray-800 text-center">
+                    <p class="text-[10px] uppercase font-semibold text-gray-400">Punkty ELO</p>
+                    <p id="modalElo" class="text-xl font-bold font-display text-brand-gold">0</p>
+                </div>
+                <div class="bg-gray-800/50 p-3 rounded-xl border border-gray-800 text-center">
+                    <p class="text-[10px] uppercase font-semibold text-gray-400">Wygrane / Porażki</p>
+                    <p id="modalWL" class="text-xl font-bold text-white">0 / 0</p>
+                </div>
+                <div class="bg-gray-800/50 p-3 rounded-xl border border-gray-800 text-center">
+                    <p class="text-[10px] uppercase font-semibold text-gray-400">Win Rate</p>
+                    <p id="modalWinRate" class="text-xl font-bold text-emerald-400">0%</p>
+                </div>
+                <div class="bg-gray-800/50 p-3 rounded-xl border border-gray-800 text-center">
+                    <p class="text-[10px] uppercase font-semibold text-gray-400">Aktualna Seria</p>
+                    <p id="modalStreak" class="text-xl font-bold text-purple-400">0 W</p>
+                </div>
+            </div>
+
+            <div>
+                <h3 class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">Historia ELO</h3>
+                <div class="bg-gray-950/60 p-4 rounded-xl border border-gray-800 h-48">
+                    <canvas id="eloChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SKRYPT SKIEROWANY NA TWÓJ PLIK SKRYPTU API -->
+    <script src="./fetch-stats.js"></script>
+
     <script>
-        function changePage(pageId) {
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.querySelectorAll('nav button').forEach(b => b.className = '');
+        let playersData = [];
+        let currentSelectedGame = "ALL";
+        let currentSearchQuery = "";
+        let currentSortOption = "elo_desc";
+        let myEloChart = null;
 
-            document.getElementById(pageId).classList.add('active');
-            document.getElementById(`btn-${pageId}`).classList.add(`active-${pageId}`);
-        }
+        const leaderboardBody = document.getElementById('leaderboardBody');
+        const podiumSection = document.getElementById('podiumSection');
+        const searchInput = document.getElementById('searchInput');
+        const mobileSearchInput = document.getElementById('mobileSearchInput');
+        const sortSelect = document.getElementById('sortSelect');
+        const visibleCount = document.getElementById('visibleCount');
+        const noResults = document.getElementById('noResults');
+        const loadingState = document.getElementById('loadingState');
 
-        function submitNextGame() {
-            const input = document.getElementById('next-game-input');
-            if(input.value.trim() !== '') {
-                alert('Zapisano propozycję: ' + input.value);
-                input.value = '';
-            }
-        }
-
-        async function loadStats() {
+        // Funkcja pobierająca dane ze skryptu JS lub zewnętrznego API
+        async function fetchLiveStats() {
             try {
-                const response = await fetch('./stats.json?v=' + new Date().getTime());
-                const data = await response.json();
-
-                const updatedText = "Ostatnia synchronizacja API: " + (data.updatedAt || 'Brak danych');
-                document.getElementById('lol-updated').innerText = updatedText;
-                document.getElementById('cs2-updated').innerText = updatedText;
-                document.getElementById('cr-updated').innerText = updatedText;
-
-                // --- LOL GRID ---
-                const lolGrid = document.getElementById('lol-grid');
-                if (data.lolTeam && data.lolTeam.length > 0) {
-                    lolGrid.innerHTML = data.lolTeam.map(p => `
-                        <div class="player-card">
-                            <div class="player-header">
-                                <span style="font-weight: 700; font-size: 1.2rem;">${p.playerName}</span>
-                                <span class="badge-role">${p.role}</span>
-                            </div>
-                            ${p.accounts.map(acc => `
-                                <div class="account-box">
-                                    <div style="color: var(--accent-lol); font-weight: 700; font-size: 0.9rem;">${acc.name}</div>
-                                    <div class="stat-grid">
-                                        <div><span class="stat-label">Ranga LP</span><span class="stat-value">${acc.currentElo}</span></div>
-                                        <div><span class="stat-label">Gry</span><span class="stat-value">${acc.games}</span></div>
-                                        <div style="grid-column: span 2;">
-                                            <span class="stat-label">Winrate: ${acc.winrate}%</span>
-                                            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: ${acc.winrate}%"></div></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            `).join('')}
-                        </div>
-                    `).join('');
+                loadingState.classList.remove('hidden');
+                
+                // Opcja A: Jeśli Twój fetch-stats.js udostępnia funkcję getStats() lub globalną zmienną window.teamCwlData
+                if (typeof getTeamCWLStats === 'function') {
+                    playersData = await getTeamCWLStats();
+                } else if (window.teamCwlData) {
+                    playersData = window.teamCwlData;
                 } else {
-                    lolGrid.innerHTML = '<p style="color: var(--text-muted)">Czekam na pierwszą automatyczną synchronizację API...</p>';
+                    // Opcja B: Pobranie z pliku JSON wygenerowanego przez Twój skrypt fetch-stats.js
+                    const response = await fetch('./stats-data.json');
+                    playersData = await response.json();
                 }
 
-                // --- CS2 GRID ---
-                const cs2Grid = document.getElementById('cs2-grid');
-                if (data.cs2Team && data.cs2Team.length > 0) {
-                    cs2Grid.innerHTML = data.cs2Team.map(p => `
-                        <div class="player-card">
-                            <div class="player-header">
-                                <span style="font-weight: 700; font-size: 1.2rem;">${p.playerName}</span>
-                                <span class="badge-role">${p.role}</span>
-                            </div>
-                            <div class="account-box">
-                                <div style="color: var(--accent-cs2); font-weight: 700; font-size: 0.9rem;">Premier Matchmaking</div>
-                                <div class="stat-grid">
-                                    <div><span class="stat-label">CS Rating</span><span class="stat-value" style="color: var(--accent-cs2)">${p.premier.rating}</span></div>
-                                </div>
-                            </div>
-                            <div class="account-box">
-                                <div style="color: var(--accent-faceit); font-weight: 700; font-size: 0.9rem;">FACEIT</div>
-                                <div class="stat-grid">
-                                    <div><span class="stat-label">Poziom / ELO</span><span class="stat-value">${p.faceit.level} (${p.faceit.elo} ELO)</span></div>
-                                    <div><span class="stat-label">K/D</span><span class="stat-value">${p.faceit.kd}</span></div>
-                                    <div style="grid-column: span 2;">
-                                        <span class="stat-label">Winrate: ${p.faceit.winrate}%</span>
-                                        <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: ${p.faceit.winrate}%"></div></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    `).join('');
-                } else {
-                    cs2Grid.innerHTML = '<p style="color: var(--text-muted)">Czekam na pierwszą automatyczną synchronizację API...</p>';
-                }
-
-                // --- CLASH ROYALE GRID ---
-                const crGrid = document.getElementById('cr-grid');
-                if (data.clashRoyaleTeam && data.clashRoyaleTeam.length > 0) {
-                    crGrid.innerHTML = data.clashRoyaleTeam.map(p => `
-                        <div class="player-card">
-                            <div class="player-header">
-                                <span style="font-weight: 700; font-size: 1.2rem;">${p.playerName}</span>
-                                <span class="badge-role">${p.role}</span>
-                            </div>
-                            <div class="account-box">
-                                <div style="color: var(--accent-cr); font-weight: 700; font-size: 0.9rem;">
-                                    ${p.stats.ingameName || 'Brak konta'} <span style="color: var(--text-muted); font-size: 0.75rem;">(${p.tag})</span>
-                                </div>
-                                <div class="stat-grid">
-                                    <div><span class="stat-label">Puchary</span><span class="stat-value" style="color: var(--accent-cr)">🏆 ${p.stats.trophies}</span></div>
-                                    <div><span class="stat-label">Rekord pucharów</span><span class="stat-value">👑 ${p.stats.bestTrophies}</span></div>
-                                    <div><span class="stat-label">Wygrane mecze</span><span class="stat-value">⚔️ ${p.stats.wins}</span></div>
-                                    <div><span class="stat-label">Wygrane wojny</span><span class="stat-value">🛡️ ${p.stats.warDayWins}</span></div>
-                                    <div style="grid-column: span 2;">
-                                        <span class="stat-label">Klan</span>
-                                        <span class="stat-value">${p.stats.clan}</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    `).join('');
-                } else {
-                    crGrid.innerHTML = '<p style="color: var(--text-muted)">Czekam na pierwszą automatyczną synchronizację API...</p>';
-                }
-
-            } catch (err) {
-                console.error("Błąd podczas ładowania stats.json:", err);
+                loadingState.classList.add('hidden');
+                updateOverviewStats();
+                renderPodium();
+                renderLeaderboard();
+            } catch (error) {
+                console.error("Błąd podczas ładowania danych z API:", error);
+                loadingState.innerHTML = `<p class="text-red-400 text-sm"><i class="fa-solid fa-triangle-exclamation mr-1"></i> Błąd podczas ładowania danych API.</p>`;
             }
         }
 
-        document.addEventListener('DOMContentLoaded', loadStats);
-        const openBtn = document.getElementById('openBtn');
-        const imgOverlay = document.getElementById('imgOverlay');
+        function updateOverviewStats() {
+            if (!playersData || playersData.length === 0) return;
 
-        openBtn.addEventListener('click', () => {
-            imgOverlay.style.display = 'flex';
-        });
+            document.getElementById('statTotalPlayers').innerText = playersData.length;
+            
+            const totalMatches = playersData.reduce((acc, p) => acc + ((p.wins || 0) + (p.losses || 0)), 0);
+            document.getElementById('statTotalMatches').innerText = totalMatches.toLocaleString();
 
-        imgOverlay.addEventListener('click', () => {
-            imgOverlay.style.display = 'none';
-        });
+            const sortedByElo = [...playersData].sort((a, b) => (b.elo || 0) - (a.elo || 0));
+            const topPlayer = sortedByElo[0];
+
+            if (topPlayer) {
+                document.getElementById('statTopPlayer').innerText = topPlayer.name;
+                document.getElementById('statTopPlayerElo').innerText = `${topPlayer.elo || 0} ELO`;
+            }
+
+            const avgElo = Math.round(playersData.reduce((acc, p) => acc + (p.elo || 0), 0) / playersData.length);
+            document.getElementById('statAvgElo').innerText = avgElo;
+        }
+
+        function getFilteredAndSortedPlayers() {
+            return playersData.filter(player => {
+                const matchesGame = (currentSelectedGame === "ALL") || (player.gameCategory === currentSelectedGame);
+                const matchesSearch = player.name.toLowerCase().includes(currentSearchQuery.toLowerCase());
+                return matchesGame && matchesSearch;
+            }).sort((a, b) => {
+                if (currentSortOption === 'elo_desc') return (b.elo || 0) - (a.elo || 0);
+                if (currentSortOption === 'elo_asc') return (a.elo || 0) - (b.elo || 0);
+                if (currentSortOption === 'winrate_desc') return (b.winRate || 0) - (a.winRate || 0);
+                if (currentSortOption === 'wins_desc') return (b.wins || 0) - (a.wins || 0);
+                if (currentSortOption === 'streak_desc') return (b.streak || 0) - (a.streak || 0);
+                return 0;
+            });
+        }
+
+        function renderPodium() {
+            const allSorted = [...playersData].sort((a, b) => (b.elo || 0) - (a.elo || 0));
+            const top3 = allSorted.slice(0, 3);
+            if (top3.length < 3) {
+                podiumSection.innerHTML = '';
+                return;
+            }
+
+            const [first, second, third] = [top3[0], top3[1], top3[2]];
+
+            podiumSection.innerHTML = `
+                <div onclick="openPlayerModal('${second.id || second.name}')" class="glass-card glass-card-hover p-5 rounded-2xl flex flex-col items-center justify-between cursor-pointer border border-gray-400/20 order-2 md:order-1 mt-4 md:mt-6">
+                    <div class="text-center">
+                        <span class="inline-block bg-gray-400/20 text-gray-300 border border-gray-400/40 text-[10px] font-black px-3 py-1 rounded-full font-display mb-3">#2 MIEJSCE</span>
+                        <img src="${second.avatar || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150'}" class="w-16 h-16 rounded-full mx-auto border-2 border-gray-300 shadow-md object-cover mb-2">
+                        <h4 class="font-display font-bold text-white text-base">${second.name}</h4>
+                        <p class="text-xs text-gray-400 mb-3">${second.game || 'CS2/LoL'}</p>
+                    </div>
+                    <div class="w-full bg-gray-900/80 p-3 rounded-xl border border-gray-800 text-center">
+                        <span class="text-xs text-gray-400">ELO</span>
+                        <p class="text-lg font-black font-display text-gray-200">${second.elo || 0}</p>
+                    </div>
+                </div>
+
+                <div onclick="openPlayerModal('${first.id || first.name}')" class="glass-card glass-card-hover rank-1-aura p-6 rounded-2xl flex flex-col items-center justify-between cursor-pointer border border-amber-500/40 bg-gradient-to-b from-amber-500/10 to-transparent order-1 md:order-2">
+                    <div class="text-center relative">
+                        <div class="absolute -top-4 left-1/2 -translate-x-1/2 text-amber-400 text-xl animate-bounce">
+                            <i class="fa-solid fa-crown"></i>
+                        </div>
+                        <span class="inline-block bg-amber-500/20 text-amber-300 border border-amber-500/40 text-[10px] font-black px-3 py-1 rounded-full font-display mb-3 mt-2">#1 LIDER LIGI</span>
+                        <img src="${first.avatar || 'https://images.unsplash.com/photo-1566492031773-4f4e44671857?w=150'}" class="w-20 h-20 rounded-full mx-auto border-2 border-amber-400 shadow-lg shadow-amber-500/20 object-cover mb-2">
+                        <h4 class="font-display font-black text-white text-lg">${first.name}</h4>
+                        <p class="text-xs text-amber-400 font-semibold mb-3">${first.game || 'CS2/LoL'}</p>
+                    </div>
+                    <div class="w-full bg-amber-500/10 p-3.5 rounded-xl border border-amber-500/30 text-center">
+                        <span class="text-xs text-amber-300/80 uppercase font-semibold">ELO Lidera</span>
+                        <p class="text-2xl font-black font-display text-amber-400">${first.elo || 0}</p>
+                    </div>
+                </div>
+
+                <div onclick="openPlayerModal('${third.id || third.name}')" class="glass-card glass-card-hover p-5 rounded-2xl flex flex-col items-center justify-between cursor-pointer border border-amber-700/20 order-3 mt-4 md:mt-8">
+                    <div class="text-center">
+                        <span class="inline-block bg-amber-700/20 text-amber-500 border border-amber-700/40 text-[10px] font-black px-3 py-1 rounded-full font-display mb-3">#3 MIEJSCE</span>
+                        <img src="${third.avatar || 'https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=150'}" class="w-16 h-16 rounded-full mx-auto border-2 border-amber-600 shadow-md object-cover mb-2">
+                        <h4 class="font-display font-bold text-white text-base">${third.name}</h4>
+                        <p class="text-xs text-gray-400 mb-3">${third.game || 'CS2/LoL'}</p>
+                    </div>
+                    <div class="w-full bg-gray-900/80 p-3 rounded-xl border border-gray-800 text-center">
+                        <span class="text-xs text-gray-400">ELO</span>
+                        <p class="text-lg font-black font-display text-amber-600">${third.elo || 0}</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderLeaderboard() {
+            const players = getFilteredAndSortedPlayers();
+            visibleCount.innerText = players.length;
+
+            if (players.length === 0) {
+                leaderboardBody.innerHTML = '';
+                noResults.classList.remove('hidden');
+                return;
+            } else {
+                noResults.classList.add('hidden');
+            }
+
+            leaderboardBody.innerHTML = players.map((player, index) => {
+                let rankBadge = `<span class="font-display font-bold text-gray-400 text-sm">${index + 1}</span>`;
+                if (index === 0) rankBadge = `<span class="w-7 h-7 rounded-full bg-amber-500/20 text-amber-400 font-display font-black text-xs flex items-center justify-center mx-auto">1</span>`;
+                if (index === 1) rankBadge = `<span class="w-7 h-7 rounded-full bg-gray-400/20 text-gray-300 font-display font-black text-xs flex items-center justify-center mx-auto">2</span>`;
+                if (index === 2) rankBadge = `<span class="w-7 h-7 rounded-full bg-amber-700/20 text-amber-600 font-display font-black text-xs flex items-center justify-center mx-auto">3</span>`;
+
+                return `
+                    <tr onclick="openPlayerModal('${player.id || player.name}')" class="hover:bg-gray-800/40 transition cursor-pointer group">
+                        <td class="py-4 px-4 text-center">${rankBadge}</td>
+                        <td class="py-4 px-4">
+                            <div class="flex items-center space-x-3">
+                                <img src="${player.avatar || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150'}" class="w-10 h-10 rounded-xl object-cover border border-gray-700 group-hover:border-brand-500 transition">
+                                <div>
+                                    <p class="font-bold text-white group-hover:text-brand-accent transition flex items-center space-x-1.5">
+                                        <span>${player.name}</span>
+                                    </p>
+                                    <p class="text-[11px] text-gray-400">${player.role || 'MEMBER'}</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="py-4 px-4 text-center">
+                            <span class="text-xs px-2.5 py-1 rounded-lg bg-gray-900 border border-gray-800 text-gray-300 font-medium">${player.game || 'CS2/LoL'}</span>
+                        </td>
+                        <td class="py-4 px-4 text-right">
+                            <span class="font-display font-black text-brand-gold text-base">${player.elo || 0}</span>
+                        </td>
+                        <td class="py-4 px-4 text-center text-xs">
+                            <span class="text-emerald-400 font-bold">${player.wins || 0}W</span> 
+                            <span class="text-gray-500">/</span> 
+                            <span class="text-red-400 font-bold">${player.losses || 0}L</span>
+                        </td>
+                        <td class="py-4 px-4 text-center">
+                            <div class="flex flex-col items-center">
+                                <span class="text-xs font-bold text-gray-200">${player.winRate || 0}%</span>
+                                <div class="w-16 h-1.5 bg-gray-800 rounded-full overflow-hidden mt-1">
+                                    <div class="h-full bg-gradient-to-r from-brand-500 to-emerald-400" style="width: ${player.winRate || 0}%"></div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="py-4 px-4 text-center">
+                            ${(player.streak || 0) > 0 
+                                ? `<span class="text-xs font-extrabold text-purple-400 bg-purple-500/10 border border-purple-500/20 px-2 py-0.5 rounded-md"><i class="fa-solid fa-fire mr-1 text-[10px]"></i>${player.streak} W</span>`
+                                : `<span class="text-xs text-gray-500">-</span>`
+                            }
+                        </td>
+                        <td class="py-4 px-4 text-center">
+                            <button class="text-xs text-gray-400 group-hover:text-white bg-gray-800 group-hover:bg-brand-600 px-3 py-1.5 rounded-lg transition">
+                                Statystyki
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        function openPlayerModal(identifier) {
+            const player = playersData.find(p => (p.id === identifier || p.name === identifier));
+            if (!player) return;
+
+            document.getElementById('modalAvatar').src = player.avatar || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150';
+            document.getElementById('modalPlayerName').innerText = player.name;
+            document.getElementById('modalGameTag').innerText = player.game || 'CS2/LoL';
+            document.getElementById('modalRole').innerHTML = `<i class="fa-solid fa-user-gear mr-1"></i> Rola: ${player.role || 'MEMBER'}`;
+            document.getElementById('modalElo').innerText = player.elo || 0;
+            document.getElementById('modalWL').innerText = `${player.wins || 0} / ${player.losses || 0}`;
+            document.getElementById('modalWinRate').innerText = `${player.winRate || 0}%`;
+            document.getElementById('modalStreak').innerText = `${player.streak || 0} Wygranych`;
+
+            renderEloChart(player.eloTrend || [1500, 1520, 1540, 1560, 1580, 1600]);
+
+            const modal = document.getElementById('playerModal');
+            const modalContent = document.getElementById('playerModalContent');
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                modalContent.classList.remove('scale-95');
+                modalContent.classList.add('scale-100');
+            }, 10);
+        }
+
+        function closePlayerModal() {
+            const modal = document.getElementById('playerModal');
+            const modalContent = document.getElementById('playerModalContent');
+            modal.classList.add('opacity-0');
+            modalContent.classList.remove('scale-100');
+            modalContent.classList.add('scale-95');
+            setTimeout(() => modal.classList.add('hidden'), 300);
+        }
+
+        function renderEloChart(trendData) {
+            const ctx = document.getElementById('eloChart').getContext('2d');
+            if (myEloChart) myEloChart.destroy();
+
+            myEloChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: trendData.map((_, i) => `M${i + 1}`),
+                    datasets: [{
+                        label: 'ELO',
+                        data: trendData,
+                        borderColor: '#6366f1',
+                        backgroundColor: 'rgba(99, 102, 241, 0.15)',
+                        borderWidth: 3,
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        x: { grid: { color: 'rgba(255, 255, 255, 0.05)' } },
+                        y: { grid: { color: 'rgba(255, 255, 255, 0.05)' } }
+                    }
+                }
+            });
+        }
+
+        function refreshApiData() {
+            const icon = document.getElementById('refreshIcon');
+            icon.classList.add('fa-spin');
+            fetchLiveStats().then(() => {
+                setTimeout(() => icon.classList.remove('fa-spin'), 600);
+            });
+        }
+
+        function resetFilters() {
+            currentSelectedGame = "ALL";
+            currentSearchQuery = "";
+            currentSortOption = "elo_desc";
+            if (searchInput) searchInput.value = "";
+            if (sortSelect) sortSelect.value = "elo_desc";
+            renderLeaderboard();
+        }
+
+        window.onload = function() {
+            fetchLiveStats();
+
+            if (searchInput) {
+                searchInput.addEventListener('input', (e) => {
+                    currentSearchQuery = e.target.value;
+                    renderLeaderboard();
+                });
+            }
+
+            if (sortSelect) {
+                sortSelect.addEventListener('change', (e) => {
+                    currentSortOption = e.target.value;
+                    renderLeaderboard();
+                });
+            }
+
+            document.querySelectorAll('.game-tab').forEach(tab => {
+                tab.addEventListener('click', () => {
+                    document.querySelectorAll('.game-tab').forEach(t => {
+                        t.className = "game-tab bg-gray-900/80 hover:bg-gray-800 text-gray-300 hover:text-white font-medium text-xs sm:text-sm px-4 py-2.5 rounded-xl border border-gray-800 whitespace-nowrap transition flex items-center space-x-2";
+                    });
+                    tab.className = "game-tab bg-gradient-to-r from-brand-600 to-brand-500 text-white font-semibold text-xs sm:text-sm px-4 py-2.5 rounded-xl border border-brand-400/30 whitespace-nowrap shadow-lg shadow-brand-500/20 flex items-center space-x-2";
+                    currentSelectedGame = tab.dataset.game;
+                    renderLeaderboard();
+                });
+            });
+        };
     </script>
 </body>
 </html>
