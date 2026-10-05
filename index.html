@@ -348,37 +348,69 @@
     try {
         loadingState.classList.remove('hidden');
 
-        // Pobieramy wygenerowany przez GitHub Actions plik stats.json
-        const response = await fetch('./stats.json');
+        const response = await fetch(`./stats.json?t=${new Date().getTime()}`);
         if (!response.ok) {
-            throw new Error(`Nie udało się pobrać pliku stats.json (status: ${response.status})`);
+            throw new Error(`Nie udało się pobrać stats.json (${response.status})`);
         }
 
         const rawData = await response.json();
+        const parsedPlayers = [];
 
-        // Mapujemy dane z formatu stats.json na płaską strukturę dla tabeli w index.html
-        playersData = rawData.cs2Team.map(cs2Player => {
-            // Znajdujemy odpowiadające konto z LoL dla tego samego gracza
-            const lolPlayer = rawData.lolTeam.find(p => p.playerName === cs2Player.playerName);
+        // 1. Mapowanie CS2 / FACEIT
+        if (rawData.cs2Team) {
+            rawData.cs2Team.forEach(p => {
+                const eloVal = p.faceit?.elo || 0;
+                const winrateVal = parseInt(p.faceit?.winrate) || 0;
 
-            const faceitElo = cs2Player.faceit?.elo || 0;
-            const faceitWinrate = parseInt(cs2Player.faceit?.winrate) || 0;
+                parsedPlayers.push({
+                    id: `${p.playerName}-CS2`,
+                    name: p.playerName,
+                    role: p.role || 'MEMBER',
+                    game: 'CS2/FACEIT',
+                    gameCategory: 'CS2',
+                    elo: eloVal,
+                    wins: 0,
+                    losses: 0,
+                    winRate: winrateVal,
+                    streak: 0,
+                    avatar: `https://api.dicebear.com/7.x/bottts/svg?seed=${p.playerName}`,
+                    eloTrend: [eloVal - 40, eloVal - 15, eloVal]
+                });
+            });
+        }
 
-            return {
-                id: cs2Player.playerName,
-                name: cs2Player.playerName,
-                role: cs2Player.role || 'MEMBER',
-                game: 'CS2/FACEIT',
-                gameCategory: 'CS2',
-                elo: faceitElo,
-                wins: 0, 
-                losses: 0,
-                winRate: faceitWinrate,
-                streak: 0,
-                avatar: `https://api.dicebear.com/7.x/bottts/svg?seed=${cs2Player.playerName}`,
-                eloTrend: [faceitElo - 50, faceitElo - 20, faceitElo]
-            };
-        });
+        // 2. Mapowanie League of Legends
+        if (rawData.lolTeam) {
+            rawData.lolTeam.forEach(p => {
+                // Wyciągamy pierwsze konto gracza lub sumujemy mecze
+                const mainAccount = p.accounts && p.accounts[0] ? p.accounts[0] : null;
+                const rawEloStr = mainAccount ? mainAccount.currentElo : "0";
+                
+                // Wyciąganie szacowanego LP/punktów jako ELO do sortowania (np. z "SILVER 1 (45 LP)")
+                let numericElo = 0;
+                const lpMatch = rawEloStr.match(/\((\d+)\s*LP\)/i);
+                if (lpMatch) {
+                    numericElo = parseInt(lpMatch[1]);
+                }
+
+                parsedPlayers.push({
+                    id: `${p.playerName}-LOL`,
+                    name: p.playerName,
+                    role: p.role || 'MEMBER',
+                    game: mainAccount ? mainAccount.name : 'League of Legends',
+                    gameCategory: 'LOL',
+                    elo: numericElo,
+                    wins: mainAccount ? Math.round((mainAccount.games || 0) * ((mainAccount.winrate || 0) / 100)) : 0,
+                    losses: mainAccount ? Math.round((mainAccount.games || 0) * (1 - ((mainAccount.winrate || 0) / 100))) : 0,
+                    winRate: mainAccount ? mainAccount.winrate : 0,
+                    streak: 0,
+                    avatar: `https://api.dicebear.com/7.x/bottts/svg?seed=${p.playerName}-lol`,
+                    eloTrend: [numericElo]
+                });
+            });
+        }
+
+        playersData = parsedPlayers;
 
         loadingState.classList.add('hidden');
         updateOverviewStats();
