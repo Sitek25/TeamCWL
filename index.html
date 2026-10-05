@@ -325,8 +325,7 @@
         </div>
     </div>
 
-    <!-- SKRYPT SKIEROWANY NA TWÓJ PLIK SKRYPTU API -->
-    <script src="./fetch-stats.js"></script>
+
 
     <script>
         let playersData = [];
@@ -345,30 +344,51 @@
         const loadingState = document.getElementById('loadingState');
 
         // Funkcja pobierająca dane ze skryptu JS lub zewnętrznego API
-        async function fetchLiveStats() {
-            try {
-                loadingState.classList.remove('hidden');
-                
-                // Opcja A: Jeśli Twój fetch-stats.js udostępnia funkcję getStats() lub globalną zmienną window.teamCwlData
-                if (typeof getTeamCWLStats === 'function') {
-                    playersData = await getTeamCWLStats();
-                } else if (window.teamCwlData) {
-                    playersData = window.teamCwlData;
-                } else {
-                    // Opcja B: Pobranie z pliku JSON wygenerowanego przez Twój skrypt fetch-stats.js
-                    const response = await fetch('./stats-data.json');
-                    playersData = await response.json();
-                }
+      async function fetchLiveStats() {
+    try {
+        loadingState.classList.remove('hidden');
 
-                loadingState.classList.add('hidden');
-                updateOverviewStats();
-                renderPodium();
-                renderLeaderboard();
-            } catch (error) {
-                console.error("Błąd podczas ładowania danych z API:", error);
-                loadingState.innerHTML = `<p class="text-red-400 text-sm"><i class="fa-solid fa-triangle-exclamation mr-1"></i> Błąd podczas ładowania danych API.</p>`;
-            }
+        // Pobieramy wygenerowany przez GitHub Actions plik stats.json
+        const response = await fetch('./stats.json');
+        if (!response.ok) {
+            throw new Error(`Nie udało się pobrać pliku stats.json (status: ${response.status})`);
         }
+
+        const rawData = await response.json();
+
+        // Mapujemy dane z formatu stats.json na płaską strukturę dla tabeli w index.html
+        playersData = rawData.cs2Team.map(cs2Player => {
+            // Znajdujemy odpowiadające konto z LoL dla tego samego gracza
+            const lolPlayer = rawData.lolTeam.find(p => p.playerName === cs2Player.playerName);
+
+            const faceitElo = cs2Player.faceit?.elo || 0;
+            const faceitWinrate = parseInt(cs2Player.faceit?.winrate) || 0;
+
+            return {
+                id: cs2Player.playerName,
+                name: cs2Player.playerName,
+                role: cs2Player.role || 'MEMBER',
+                game: 'CS2/FACEIT',
+                gameCategory: 'CS2',
+                elo: faceitElo,
+                wins: 0, 
+                losses: 0,
+                winRate: faceitWinrate,
+                streak: 0,
+                avatar: `https://api.dicebear.com/7.x/bottts/svg?seed=${cs2Player.playerName}`,
+                eloTrend: [faceitElo - 50, faceitElo - 20, faceitElo]
+            };
+        });
+
+        loadingState.classList.add('hidden');
+        updateOverviewStats();
+        renderPodium();
+        renderLeaderboard();
+    } catch (error) {
+        console.error("Błąd podczas ładowania danych z stats.json:", error);
+        loadingState.innerHTML = `<p class="text-red-400 text-sm"><i class="fa-solid fa-triangle-exclamation mr-1"></i> Błąd podczas ładowania stats.json: ${error.message}</p>`;
+    }
+}
 
         function updateOverviewStats() {
             if (!playersData || playersData.length === 0) return;
