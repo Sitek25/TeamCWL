@@ -1,5 +1,5 @@
 {
-  "updatedAt": "6.10.2026, 01:51:41",
+  "updatedAt": "6.10.2026, 07:29:07",
   "lolTeam": [
     {
       "playerName": "Sitek",
@@ -285,7 +285,7 @@
       },
       "faceit": {
         "level": "Level 6",
-        "elo": 1273,
+        "elo": 1247,
         "kd": "1.17",
         "winrate": "49"
       }
