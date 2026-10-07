@@ -1,5 +1,5 @@
 {
-  "updatedAt": "7.10.2026, 14:53:07",
+  "updatedAt": "8.10.2026, 00:52:29",
   "lolTeam": [
     {
       "playerName": "Sitek",
@@ -13,9 +13,9 @@
         },
         {
           "name": "S1 Siteek#EUNE",
-          "currentElo": "EMERALD III (40 LP)",
+          "currentElo": "EMERALD III (20 LP)",
           "winrate": 50,
-          "games": 217
+          "games": 218
         },
         {
           "name": "eGirl from Dream#EUNE",
@@ -207,7 +207,7 @@
       },
       "faceit": {
         "level": "Level 9",
-        "elo": 1959,
+        "elo": 1960,
         "kd": "1.3",
         "winrate": "50"
       }
@@ -246,8 +246,8 @@
       },
       "faceit": {
         "level": "Level 8",
-        "elo": 1592,
-        "kd": "1.09",
+        "elo": 1596,
+        "kd": "1.1",
         "winrate": "50"
       }
     },
@@ -259,7 +259,7 @@
       },
       "faceit": {
         "level": "Level 3",
-        "elo": 815,
+        "elo": 813,
         "kd": "0.73",
         "winrate": "50"
       }
@@ -284,8 +284,8 @@
         "rating": "BRAK"
       },
       "faceit": {
-        "level": "Level 6",
-        "elo": 1319,
+        "level": "Level 7",
+        "elo": 1355,
         "kd": "1.17",
         "winrate": "49"
       }
