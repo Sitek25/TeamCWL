@@ -1,5 +1,5 @@
 {
-  "updatedAt": "21.10.2026, 18:49:51",
+  "updatedAt": "21.10.2026, 23:23:52",
   "lolTeam": [
     {
       "playerName": "Sitek",
@@ -7,9 +7,9 @@
       "accounts": [
         {
           "name": "Sit3k#Sit3k",
-          "currentElo": "DIAMOND II (76 LP)",
+          "currentElo": "DIAMOND II (74 LP)",
           "winrate": 51,
-          "games": 408
+          "games": 410
         },
         {
           "name": "S1 Siteek#EUNE",
@@ -284,10 +284,10 @@
         "rating": "BRAK"
       },
       "faceit": {
-        "level": "Level 8",
-        "elo": 1549,
+        "level": "Level 7",
+        "elo": 1504,
         "kd": "1.17",
-        "winrate": "50"
+        "winrate": "49"
       }
     }
   ],
