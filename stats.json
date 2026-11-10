@@ -1,5 +1,5 @@
 {
-  "updatedAt": "10.11.2026, 15:31:30",
+  "updatedAt": "10.11.2026, 23:57:39",
   "lolTeam": [
     {
       "playerName": "Sitek",
@@ -43,7 +43,7 @@
       "accounts": [
         {
           "name": "jawnogrzesznica#Paczu",
-          "currentElo": "DIAMOND IV (75 LP)",
+          "currentElo": "DIAMOND IV (25 LP)",
           "winrate": 57,
           "games": 123
         }
@@ -285,8 +285,8 @@
       },
       "faceit": {
         "level": "Level 7",
-        "elo": 1358,
-        "kd": "1.16",
+        "elo": 1361,
+        "kd": "1.17",
         "winrate": "49"
       }
     }
