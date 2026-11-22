@@ -1,5 +1,5 @@
 {
-  "updatedAt": "22.11.2026, 06:43:14",
+  "updatedAt": "22.11.2026, 15:16:11",
   "lolTeam": [
     {
       "playerName": "Sitek",
@@ -31,9 +31,9 @@
       "accounts": [
         {
           "name": "LACOST#CWL",
-          "currentElo": "PLATINUM III (1 LP)",
+          "currentElo": "PLATINUM IV (78 LP)",
           "winrate": 51,
-          "games": 253
+          "games": 256
         }
       ]
     },
