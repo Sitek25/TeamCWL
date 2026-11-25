@@ -1,5 +1,5 @@
 {
-  "updatedAt": "25.11.2026, 08:36:19",
+  "updatedAt": "25.11.2026, 22:18:09",
   "lolTeam": [
     {
       "playerName": "Sitek",
@@ -19,9 +19,9 @@
         },
         {
           "name": "eGirl from Dream#EUNE",
-          "currentElo": "EMERALD IV (30 LP)",
+          "currentElo": "EMERALD IV (14 LP)",
           "winrate": 47,
-          "games": 132
+          "games": 137
         }
       ]
     },
@@ -207,7 +207,7 @@
       },
       "faceit": {
         "level": "Level 10",
-        "elo": 2053,
+        "elo": 2063,
         "kd": "1.31",
         "winrate": "50"
       }
@@ -245,8 +245,8 @@
         "rating": "BRAK"
       },
       "faceit": {
-        "level": "Level 8",
-        "elo": 1738,
+        "level": "Level 9",
+        "elo": 1757,
         "kd": "1.11",
         "winrate": "50"
       }
@@ -259,7 +259,7 @@
       },
       "faceit": {
         "level": "Level 4",
-        "elo": 988,
+        "elo": 1007,
         "kd": "0.72",
         "winrate": "52"
       }
@@ -284,8 +284,8 @@
         "rating": "BRAK"
       },
       "faceit": {
-        "level": "Level 7",
-        "elo": 1530,
+        "level": "Level 8",
+        "elo": 1552,
         "kd": "1.17",
         "winrate": "50"
       }
